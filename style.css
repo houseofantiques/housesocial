@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background-image: url('bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  color: rgb(255, 255, 255);
+  text-align: center;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease forwards;
+}
+
+.fade-in.delay {
+  animation-delay: 0.5s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* --- جولة Matterport الافتراضية --- */
+.tour-container {
+  width: 100%;
+  max-width: 800px;
+  height: 450px;
+  margin: 2rem auto;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.tour-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* --- روابط التواصل الاجتماعي --- */
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(149, 1, 1);
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  padding: 14px;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.social-link:hover {
+  transform: scale(1.05);
+  background: rgba(255, 0, 0, 0.9);
+}
+
+.social-link i {
+  margin-left: 10px;
+}
+
+@media (min-width: 600px) {
+  body {
+    padding: 3rem;
+  }
+
+  .social-links {
+    gap: 20px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+  }
+}
+
