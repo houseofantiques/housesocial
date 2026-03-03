@@ -1,0 +1,974 @@
+:root{
+  --max: 1180px;
+
+  --bg: #fff9ee;
+  --ink: #111;
+  --muted: rgba(17,17,17,.68);
+  --line: rgba(17,17,17,.12);
+
+  --glass: rgba(0,0,0,.55);
+  --glassLine: rgba(255,255,255,.10);
+
+  --radius: 18px;
+  --shadow: 0 18px 60px rgba(0,0,0,.24);
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font-family: "Cairo", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color: var(--ink);
+  background: var(--bg);
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+button{ font-family:inherit; }
+
+.wrap{
+  width: min(var(--max), calc(100% - 32px));
+  margin-inline: auto;
+}
+
+/* =========================
+   Language helper (body text)
+   HTML must wrap text with:
+   <span class="lang-ar">..</span>
+   <span class="lang-en">..</span>
+========================= */
+.lang-en{ display:none; }
+html[dir="ltr"] .lang-ar{ display:none; }
+html[dir="ltr"] .lang-en{ display:block; }
+
+/* =========================
+   TOPBAR (Glass)
+========================= */
+.hoaTopbar{
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: var(--glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--glassLine);
+}
+
+.hoaTopbar__inner{
+  width: min(var(--max), calc(100% - 32px));
+  margin-inline: auto;
+
+  /* thinner */
+  padding: 6px 0;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* left controls */
+.hoaTopbar__left{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  order: 1;
+}
+
+/* center nav */
+.hoaNav{
+  display:flex;
+  justify-content: center;
+  gap: 10px;
+  white-space: nowrap;
+
+  order: 2;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.hoaNav__link{
+  color: rgba(255,255,255,.78);
+  font-family:"Inter","Cairo",sans-serif;
+  font-size: 12px;          /* كان 12.5 */
+  padding: 7px 9px;         /* كان 8 10 */
+  border-radius: 999px;
+}
+.hoaNav__link:hover{ color:#fff; background: rgba(255,255,255,.08); }
+.hoaNav__link.is-active{ color:#0b0f14; background: rgba(255,255,255,.92); }
+
+/* brand right */
+.hoaBrand{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  justify-self: end;
+  order: 3;
+}
+
+.hoaBrand__logo{
+  width: 34px;              /* كان 42 */
+  height: 34px;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.06);
+}
+.hoaBrand__logo img{ width:100%; height:100%; object-fit: cover; }
+
+.hoaBrand__text{ color:#fff; line-height:1.1; }
+.hoaBrand__title{ display:block; font-weight: 900; font-size: 14px; }
+.hoaBrand__sub{
+  display:block;
+  font-style: normal;
+  font-family: "Inter","Cairo",sans-serif;
+  font-size: 11px;
+  opacity:.70;
+}
+
+/* right (lang) */
+.hoaTopbar__right{
+  display:flex;
+  align-items:center;
+  justify-self: end;
+  order: 4;
+  margin-inline-start: 8px;
+  white-space: nowrap; /* prevent drop line */
+}
+
+.langToggle{
+  appearance:none;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.10);
+  color:#fff;
+  height: 34px;         /* كان 38 */
+  padding: 0 12px;
+  border-radius: 999px;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.langToggle:hover{ background: rgba(255,255,255,.14); }
+.langToggle__txt{
+  font: 800 12px/1 "Inter", system-ui, sans-serif;
+  letter-spacing:.7px;
+}
+
+.iconBtn{
+  appearance:none;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.08);
+  color:#fff;
+  height: 34px;         /* كان 38 */
+  width: 42px;
+  border-radius: 999px;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.iconBtn:hover{ background: rgba(255,255,255,.12); }
+
+/* Hamburger */
+.hamburger{
+  width: 18px;
+  height: 12px;
+  position: relative;
+  display:block;
+}
+.hamburger::before,
+.hamburger::after{
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  height:2px;
+  background: rgba(255,255,255,.92);
+  border-radius: 999px;
+}
+.hamburger::before{ top:0; box-shadow: 0 5px 0 rgba(255,255,255,.92); }
+.hamburger::after{ bottom:0; }
+
+/* Mobile CTAs (if you use them) */
+.ctaPill{
+  height: 34px;         /* كان 38 */
+  padding: 0 12px;
+  border-radius: 999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size: 12px;
+  border: 1px solid rgba(255,255,255,.16);
+  white-space: nowrap;
+}
+.ctaPill--ghost{
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.92);
+}
+.ctaPill--solid{
+  background: rgba(255,255,255,.92);
+  color:#0b0f14;
+  border-color: rgba(255,255,255,.92);
+}
+
+/* Desktop layout rules */
+@media (min-width: 761px){
+  .iconBtn--menu{ display:none; }
+  .hoaTopbar__left .langToggle{ display:none; } /* desktop uses right */
+  .ctaPill{ display:none; } /* CTAs only on mobile */
+}
+
+/* Mobile layout rules */
+@media (max-width: 760px){
+  .hoaBrand__text{ display:none; }
+  .hoaNav{ display:none; }
+  .hoaTopbar__right{ display:none; }
+}
+
+/* =========================
+   MOBILE MENU (slide)
+========================= */
+.mobileMenu{
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .18s ease;
+}
+.mobileMenu.is-open{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* IMPORTANT: backdrop under panel so clicks work */
+.mobileMenu__backdrop{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,.40); /* أقل تعتيم */
+  z-index: 1;
+}
+.mobileMenu__panel{
+  position:absolute;
+  top:0; bottom:0;
+  width: min(360px, 86vw);
+  background: rgba(255,255,255,.96);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 20px 80px rgba(0,0,0,.35);
+  padding: 14px;
+  z-index: 2;
+
+  transform: translateX(0);
+}
+
+html[dir="rtl"] .mobileMenu__panel{ right:0; transform: translateX(105%); }
+html[dir="ltr"] .mobileMenu__panel{ left:0; transform: translateX(-105%); }
+.mobileMenu.is-open .mobileMenu__panel{
+  transform: translateX(0);
+  transition: transform .22s ease;
+}
+
+.mobileMenu__close{
+  appearance:none;
+  border: 1px solid rgba(0,0,0,.12);
+  background: rgba(0,0,0,.04);
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  font-size: 22px;
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+  margin-bottom: 10px;
+}
+
+.mobileMenu__nav{
+  display:flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.mobileMenu__nav a{
+  padding: 14px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.08);
+  background: rgba(255,255,255,.70);
+  color:#111;
+  font-weight: 800;
+}
+.mobileMenu__nav a.is-active{
+  background:#111;
+  color:#fff;
+  border-color:#111;
+}
+
+/* =========================
+   HERO
+========================= */
+.aboutHero{
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #111;
+}
+.aboutHero__img{
+  width: 100%;
+  height: clamp(220px, 28vw, 340px);
+  object-fit: cover;
+  display:block;
+  filter: saturate(.95) contrast(1.05);
+}
+
+/* desktop: keep your look
+   mobile: lighter overlay to avoid heavy fade */
+.aboutHero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,.02) 0%, rgba(0,0,0,.25) 55%, rgba(0,0,0,.55) 100%);
+  pointer-events:none;
+}
+@media (max-width: 760px){
+  .aboutHero::after{
+    background: linear-gradient(180deg, rgba(0,0,0,.00) 0%, rgba(0,0,0,.22) 100%);
+  }
+}
+
+.aboutHero__overlay{
+  position:absolute;
+  inset-inline: 0;
+  bottom: 16px;
+  z-index: 2;
+  padding: 0 16px;
+  width: min(var(--max), calc(100% - 32px));
+  margin-inline:auto;
+}
+
+.aboutHero__title{
+  margin: 0 0 10px;
+  color:#fff;
+  font-size: clamp(22px, 3vw, 34px);
+  letter-spacing: -.01em;
+  text-shadow: 0 10px 30px rgba(0,0,0,.45);
+}
+
+.mapBtn{
+  display:inline-flex;
+  align-items:center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.20);
+  background: rgba(0,0,0,.22);
+  color:#fff;
+  font-size: 13px;
+}
+.mapBtn:hover{ background: rgba(255,255,255,.10); }
+
+/* =========================
+   SECTIONS (light)
+========================= */
+.section{ padding: clamp(22px, 4vw, 52px) 0; }
+.grid{ display:grid; gap: 24px; }
+
+.grid--light{
+  grid-template-columns: 1.05fr .95fr;
+  align-items:start;
+}
+@media (max-width: 980px){
+  .grid--light{ grid-template-columns: 1fr; }
+}
+
+.kicker{
+  font-family:"Inter","Cairo",sans-serif;
+  font-size: 12px;
+  letter-spacing:.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+
+.title{
+  margin: 0 0 18px;
+  font-size: clamp(28px, 3.2vw, 46px);
+  line-height: 1.08;
+  letter-spacing: -.02em;
+}
+
+.metaRow{ display:flex; flex-wrap:wrap; gap: 12px; }
+
+.meta{
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 12px;
+  display:flex;
+  gap: 8px;
+  align-items: baseline;
+  background: rgba(255,255,255,.55);
+}
+.meta__label{
+  font-size: 11px;
+  color: var(--muted);
+  font-family:"Inter","Cairo",sans-serif;
+}
+.meta__value{
+  font-size: 12px;
+  font-family:"Inter","Cairo",sans-serif;
+  opacity: .92;
+}
+
+.body{
+  margin:0;
+  font-size: 15px;
+  line-height: 1.9;
+  color: rgba(17,17,17,.86);
+  max-width: 72ch;
+}
+
+.infoTable{
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow:hidden;
+  background: rgba(255,255,255,.60);
+}
+.infoRow{
+  display:grid;
+  grid-template-columns: 220px 1fr;
+  gap: 16px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+}
+.infoRow:last-child{ border-bottom:0; }
+@media (max-width: 760px){
+  .infoRow{ grid-template-columns: 150px 1fr; }
+}
+
+.infoKey{
+  font-family:"Inter","Cairo",sans-serif;
+  font-size: 12px;
+  color: var(--muted);
+}
+.infoVal{
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(17,17,17,.90);
+}
+
+.chips{ display:flex; flex-wrap:wrap; gap: 10px; }
+.chip{
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 12px;
+  font-size: 12px;
+  background: rgba(0,0,0,.02);
+}
+
+/* =========================
+   STORY STAGES (cards)
+   IMPORTANT change: remove black background so no "card inside card"
+========================= */
+.section--story{ padding-top: 10px; }
+
+.storyStage{
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,.10);
+  background: transparent;            /* was black */
+  box-shadow: none;                   /* remove heavy shadow */
+  margin-bottom: 18px;
+
+  min-height: 540px;
+}
+
+/* remove fade layer completely */
+.storyStage::before{
+  content: none;
+}
+
+/* Overlay card (keeps your design) */
+.overlayCard{
+  position:absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: min(900px, calc(100% - 40px));
+  display:grid;
+  grid-template-columns: 280px 1fr;
+  border-radius: 20px;
+  overflow:hidden;
+  background: rgba(245,242,236,.95);
+  color:#111;
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: 0 24px 70px rgba(0,0,0,.30);
+  z-index: 3;
+
+  /* keep stable when opened */
+  max-height: min(78vh, 680px);
+}
+
+/* media */
+.overlayCard__media{
+  background:#fff;
+  border-inline-end: 1px solid rgba(0,0,0,.08);
+}
+.overlayCard__media img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  aspect-ratio: 4 / 5;
+}
+
+/* text column */
+.overlayCard__text{
+  padding: 16px 16px 14px;
+  display:grid;
+  gap: 8px;
+  align-content: start;
+  min-height: 0;         /* critical for scroll */
+  overflow: hidden;      /* keep layout stable */
+}
+
+.overlayCard__kicker{
+  margin:0;
+  font-family:"Inter","Cairo",sans-serif;
+  font-size: 11px;
+  letter-spacing:.14em;
+  text-transform: uppercase;
+  color: rgba(17,17,17,.62);
+}
+.overlayCard__title{
+  margin:0;
+  font-size: 20px;
+  line-height:1.25;
+}
+.overlayCard__sub{
+  margin:-4px 0 0;
+  font-family:"Inter","Cairo",sans-serif;
+  font-size: 12px;
+  color: rgba(17,17,17,.68);
+}
+
+/* body collapsed: show more lines to reduce empty space */
+.overlayCard__body{
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.85;
+  color: rgba(17,17,17,.86);
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 12;     /* was 6 */
+  white-space: pre-line;
+
+  min-height: 0;
+}
+
+/* open state: scroll inside body only */
+.overlayCard.is-open .overlayCard__body{
+  display:block;
+  -webkit-line-clamp: unset;
+  overflow: auto;
+  max-height: 42vh;
+  -webkit-overflow-scrolling: touch;
+  padding-inline-end: 8px;
+}
+
+/* Read more button */
+.readMore{
+  border: 1px solid rgba(0,0,0,.12);
+  background: rgba(255,255,255,.78);
+  color: rgba(17,17,17,.92);
+  border-radius: 999px;
+  padding: 9px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  justify-self: start;
+}
+html[dir="ltr"] .readMore{ justify-self: end; }
+.readMore:hover{ background: rgba(255,255,255,.92); }
+
+.cardCtas{
+  display:flex;
+  gap: 10px;
+  flex-wrap:wrap;
+  margin-top: 6px;
+}
+.cardBtn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 9px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid rgba(0,0,0,.12);
+  background: rgba(255,255,255,.82);
+  color:#111;
+}
+.cardBtn:hover{ background:#fff; }
+.cardBtn--primary{
+  background:#111;
+  color:#fff;
+  border-color:#111;
+}
+.cardBtn--ghost{
+  background: transparent;
+  color:#111;
+  border-color: rgba(0,0,0,.16);
+}
+.cardBtn--ghost:hover{ background: rgba(0,0,0,.04); }
+
+.overlayCard__meta{
+  margin-top: 10px;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.mini{
+  border: 1px solid rgba(0,0,0,.10);
+  border-radius: 14px;
+  padding: 10px;
+  background: rgba(255,255,255,.62);
+}
+.mini__k{
+  display:block;
+  font-size: 11px;
+  color: rgba(17,17,17,.55);
+  font-family:"Inter","Cairo",sans-serif;
+}
+.mini__v{
+  display:block;
+  font-size: 12px;
+  color: rgba(17,17,17,.92);
+}
+
+/* responsive story layout */
+@media (max-width: 860px){
+  .storyStage{ min-height: 520px; }
+
+  .overlayCard{
+    grid-template-columns: 1fr;
+    width: min(760px, calc(100% - 28px));
+  }
+  .overlayCard__media{
+    border-inline-end: 0;
+    border-bottom: 1px solid rgba(0,0,0,.08);
+  }
+  .overlayCard__media img{ aspect-ratio: 16 / 9; }
+  .overlayCard__meta{ grid-template-columns: 1fr; }
+
+  /* mobile/ tablet: a bit less lines */
+  .overlayCard__body{ -webkit-line-clamp: 10; }
+  .overlayCard.is-open .overlayCard__body{ max-height: 52vh; }
+}
+
+@media (max-width: 520px){
+  .storyStage{ min-height: auto; padding: 14px 0; }
+  .overlayCard{
+    position: static;
+    transform: none;
+    margin: 14px auto;
+    width: calc(100% - 28px);
+    max-height: min(88vh, 720px);
+  }
+}
+
+/* =========================
+   FOOTER COVER
+========================= */
+.footerCover{
+  width:100%;
+  height: 240px;
+  overflow:hidden;
+  border-top: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  background:#000;
+}
+.footerCover img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  object-position: center;
+}
+@media (max-width: 640px){
+  .footerCover{ height: 170px; }
+}
+
+/* =========================
+   FOOTER
+========================= */
+.siteFooter{
+  background: rgba(0,0,0,.80);
+  color:#fff;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.fWrap{
+  width: min(var(--max), calc(100% - 32px));
+  margin-inline:auto;
+  padding: 18px 0 14px;
+}
+
+/* CTA */
+.fTop{ padding: 12px 0 14px; }
+.fCta{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 14px;
+}
+.fCta__title{ font-weight: 900; font-size: 18px; margin-bottom: 6px; }
+.fCta__sub{ opacity:.82; line-height: 1.8; font-size: 13px; }
+.fCta__actions{ display:flex; gap: 10px; flex-wrap: wrap; }
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid rgba(255,255,255,.18);
+}
+.btn--primary{ background: rgba(255,255,255,.92); color:#0b0f14; }
+.btn--ghost{ background: transparent; color:#fff; border-color: rgba(255,255,255,.22); }
+
+@media (max-width: 740px){
+  .fCta{ flex-direction: column; align-items: flex-start; }
+  .fCta__actions{ width: 100%; }
+  .fCta__actions .btn{ width: 100%; }
+}
+
+/* Grid */
+.fGrid{
+  display:grid;
+  gap: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,.10);
+}
+@media (min-width: 980px){
+  .fGrid{ grid-template-columns: 1.4fr 1fr 1fr 1.2fr; }
+}
+@media (max-width: 979px){
+  .fGrid{ grid-template-columns: 1fr 1fr; }
+  .fCol--about{ grid-column: 1 / -1; }
+}
+
+.fTitle{ font-weight: 900; font-size: 14px; margin: 0 0 10px; opacity: .95; }
+.fNote{ margin:0 0 10px; line-height: 1.9; opacity: .84; }
+
+.fLinks{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:grid;
+  gap: 10px;
+}
+.fLinks a{ opacity: .84; }
+.fLinks a:hover{ opacity: 1; }
+.fLinks--2col{ grid-template-columns: 1fr 1fr; gap: 10px 14px; }
+
+/* Address pill */
+.addrPill{
+  margin-top: 8px;
+  display:inline-flex;
+  align-items:center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  opacity: .92;
+}
+.addrPill:hover{ opacity:1; }
+
+.addrIco{
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.22);
+}
+.addrIco svg{ width: 20px; height: 20px; fill: rgba(255,255,255,.92); }
+
+/* Icons: 3 per row */
+.fIcons{
+  display:grid;
+  grid-template-columns: repeat(3, 44px);
+  gap: 10px;
+  align-content: start;
+}
+.ico{
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+}
+.ico svg{ width: 20px; height: 20px; fill: rgba(255,255,255,.92); }
+.ico:hover{ background: rgba(255,255,255,.08); }
+
+.fBottom{
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,.10);
+  opacity:.75;
+  font-size: 12px;
+}
+/* =========================
+   FIX: Desktop bottom cut + Mobile more lines + remove gap
+========================= */
+
+/* 1) لا تقص الكارد نفسه (هذا سبب القص من الأسفل بالديسكتوب) */
+.overlayCard{
+  overflow: visible !important;      /* بدل hidden */
+  max-height: none !important;       /* لا تخنقه */
+}
+
+/* 2) خلي عمود النص ما يختنق */
+.overlayCard__text{
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+/* 3) شيل الفراغ قبل النص (كان سبب سطر واحد مو واضح + فراغ فوق الأسطر) */
+.overlayCard__body{
+  margin-top: 0 !important;          /* كان 6px */
+  padding-top: 0 !important;
+}
+
+/* 4) خلي preview يبين أسطر أكثر (ديسكتوب) */
+.overlayCard__body{
+  -webkit-line-clamp: 14 !important; /* كان 12/6 */
+}
+
+/* 5) موبايل: أسطر أكثر + خلي الكارد ثابت بدون قص */
+@media (max-width: 520px){
+  .overlayCard__body{
+    -webkit-line-clamp: 16 !important; /* أكثر للموبايل */
+  }
+}
+
+/* 6) عند الفتح: السكروول داخل النص فقط */
+.overlayCard.is-open .overlayCard__body{
+  overflow: auto !important;
+  max-height: 52vh !important;       /* سكروول واضح */
+  -webkit-overflow-scrolling: touch;
+  padding-inline-end: 10px;
+}
+
+/* 7) إذا عندك زر Read more/اكمل القصة يسبب فراغ: ثبته تحت النص */
+.readMore{
+  margin-top: 6px !important;
+}
+/* =========================
+   FINAL FIX: stop top/bottom clipping
+   (center card without absolute positioning)
+========================= */
+
+/* الستيج يصير حاوي مرن وما يقص */
+.storyStage{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  padding: 22px 0 !important;      /* مساحة تمنع قص أعلى/أسفل */
+  min-height: auto !important;
+
+  overflow: visible !important;     /* يلغي القص */
+}
+
+/* الغِ تموضع absolute اللي يسبب خروج خارج حدود الستيج */
+.overlayCard{
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+
+  margin: 0 auto !important;
+  max-height: none !important;      /* لا تخنقه من فوق/تحت */
+}
+
+/* إذا تريدين يبقى داخل الستيج دائماً */
+.overlayCard{
+  width: min(900px, calc(100% - 40px)) !important;
+}
+
+/* موبايل: نفس الفكرة، بس مساحة أكثر */
+@media (max-width: 520px){
+  .storyStage{
+    padding: 14px 0 !important;
+  }
+  .overlayCard{
+    width: calc(100% - 28px) !important;
+  }
+}
+.overlayCard{
+  width: min(1100px, calc(100% - 40px)) !important;
+}
+/* =========================
+   MOBILE TOPBAR: clean 3-zone layout
+========================= */
+@media (max-width: 760px){
+
+  .hoaTopbar__inner{
+    display: grid !important;
+    grid-template-columns: 52px 1fr 52px !important; /* left | center | right */
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 8px 10px !important;
+  }
+
+  /* Left = menu button */
+  .hoaTopbar__left{
+    justify-self: start !important;
+    order: 1 !important;
+  }
+
+  /* Center = logo only */
+  .hoaBrand{
+    justify-self: center !important;
+    order: 2 !important;
+  }
+  .hoaBrand__text{ display:none !important; }
+  .hoaBrand__logo{
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  /* Right = language button فقط */
+  .hoaTopbar__right{
+    display: flex !important;       /* رجعناه بالموبايل */
+    justify-self: end !important;
+    order: 3 !important;
+  }
+
+  /* اخفي أي CTA أو أيقونات ثانية بالموبايل (إذا موجودة) */
+  .ctaPill{ display:none !important; }
+  .iconBtn:not(.iconBtn--menu){ display:none !important; }
+
+  /* خلي زر اللغة نفس ارتفاع الأزرار */
+  .langToggle{
+    height: 34px !important;
+    padding: 0 12px !important;
+  }
+}
+/* =========================
+   FIX: single language button
+========================= */
+
+/* اخفي زر اللغة اللي داخل اليسار دائماً */
+.hoaTopbar__left .langToggle{
+  display: none !important;
+}
+
+/* خلي زر اللغة يشتغل بالموبايل فقط من الجهة اليمنى */
+@media (max-width: 760px){
+  .hoaTopbar__right{
+    display: flex !important;
+  }
+}

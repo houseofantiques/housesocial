@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-i18n="auction.pageTitle">المزاد | بيت التحفيات</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="auction.css" />
+
+  <!-- i18n + page js -->
+  <script defer src="i18n.js"></script>
+  <script defer src="auction.js"></script>
+</head>
+
+<body>
+
+  <!-- TOPBAR -->
+  <header class="hoaTopbar" role="banner">
+    <div class="hoaTopbar__inner">
+
+      <!-- LANG (LEFT) -->
+      <button class="langToggle" type="button" aria-label="Language" data-lang-toggle>
+        <span class="langToggle__txt" data-i18n="langBtn">AR</span>
+      </button>
+
+      <!-- DESKTOP NAV (CENTER) -->
+      <nav class="hoaNav" aria-label="Primary">
+        <a class="hoaNav__link" href="index.html" data-i18n="navHome">الرئيسية</a>
+        <a class="hoaNav__link" href="about.html" data-i18n="navAbout">نبذة</a>
+        <a class="hoaNav__link" href="explore.html" data-i18n="navExplore">استكشف</a>
+        <a class="hoaNav__link" href="tour.html" data-i18n="navTour">جولة افتراضية</a>
+        <a class="hoaNav__link hoaNav__link--cta" href="contact.html" data-i18n="navContact">تواصل</a>
+      </nav>
+
+      <!-- BRAND (RIGHT) -->
+      <a class="hoaBrand" href="index.html" aria-label="House of Antiques">
+        <span class="hoaBrand__text">
+          <span class="hoaBrand__title" data-i18n="brandTitle">بيت التحفيات</span>
+          <span class="hoaBrand__sub" data-i18n="brandSub">House of Antiques</span>
+        </span>
+        <span class="hoaBrand__logo">
+          <!-- خليها Cloudinary اذا عندك -->
+          <img src="logo.png" alt="House of Antiques" loading="lazy" />
+        </span>
+      </a>
+
+      <!-- MOBILE MENU BUTTON (RIGHT - over brand on mobile) -->
+      <button class="iconBtn iconBtn--menu" type="button" aria-label="Menu" data-menu-open>
+        <span class="hamburger" aria-hidden="true"></span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="mobileMenu" data-menu aria-hidden="true">
+    <div class="mobileMenu__backdrop" data-menu-close></div>
+
+    <div class="mobileMenu__panel" role="dialog" aria-modal="true" aria-label="Menu">
+      <button class="mobileMenu__close" type="button" aria-label="Close" data-menu-close>×</button>
+
+      <nav class="mobileMenu__nav" aria-label="Mobile">
+
+        <!-- MAIN -->
+        <div class="mobileMenu__group">
+          <a href="index.html" data-i18n="navHome">الرئيسية</a>
+          <a href="about.html" data-i18n="navAbout">نبذة</a>
+          <a href="explore.html" data-i18n="navExplore">استكشف</a>
+          <a href="tour.html" data-i18n="navTour">جولة افتراضية</a>
+          <a href="contact.html" data-i18n="navContact">تواصل</a>
+        </div>
+
+        <!-- SECTIONS GRID -->
+        <div class="mobileMenu__group mobileMenu__group--grid">
+          <a href="https://houseofantiques.github.io/mtjer01/" target="_blank" rel="noopener">المتجر</a>
+          <a href="auction.html" aria-current="page">المزاد</a>
+          <a href="https://houseofantiques.github.io/Booking-/" target="_blank" rel="noopener">الحجز</a>
+          <a href="inspection.html">فحص وشراء</a>
+          <a href="press.html">الصحافة</a>
+          <a href="tour.html" data-i18n="navTour">جولة 360</a>
+        </div>
+
+        <!-- LEGAL -->
+        <div class="mobileMenu__group mobileMenu__group--legal">
+          <a href="terms.html">الشروط والأحكام</a>
+          <a href="privacy.html">سياسة الخصوصية</a>
+        </div>
+
+      </nav>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Auction cover">
+<img
+      src="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto/altariqauction_o4ahug"
+      alt="hero"
+      loading="lazy">    <div class="hero__fade" aria-hidden="true"></div>
+  </section>
+
+  <!-- CONTENT PANEL -->
+  <main class="typePanel" aria-label="Auction info">
+    <div class="typePanel__inner">
+
+      <!-- LEFT -->
+      <section class="typeLeft" aria-label="Intro">
+        <div class="typeBlock">
+          <div class="typeLabel" data-i18n="auction.label1">AUCTION</div>
+          <h1 class="typeBig" data-i18n="auction.big">مزاد الطارق — قريبًا</h1>
+        </div>
+
+        <div class="typeBlock">
+          <div class="typeLabel" data-i18n="auction.label2">BODY</div>
+          <p class="typeMid" data-i18n="auction.mid">
+            تجربة مزايدة حصرية على قطع نادرة تحمل ذاكرة بغداد.
+          </p>
+        </div>
+
+        <a class="auctionBtn"
+           href="https://houseofantiques.github.io/auction/"
+           target="_blank" rel="noopener"
+           data-i18n="auction.btn">منصة المزاد</a>
+      </section>
+
+      <!-- RIGHT -->
+      <aside class="typeRight" aria-label="Details">
+        <div class="sample">
+          <div class="sample__letters" data-i18n="auction.s1">أعمال نادرة · قطع أصلية · اختيار دقيق</div>
+          <div class="sample__letters" data-i18n="auction.s2">تحف · لوحات · مقتنيات تاريخية</div>
+          <div class="sample__nums" data-i18n="auction.s3">ومزايدة مباشرة في بث حي</div>
+        </div>
+
+        <div class="sample sample--small">
+          <div class="sample__letters" data-i18n="auction.s4">قطع مختارة بعناية</div>
+          <div class="sample__letters" data-i18n="auction.phone">+964 777 704 5599</div>
+          <div class="sample__nums" data-i18n="auction.addr">بغداد — شارع أبو نؤاس</div>
+        </div>
+
+        <div class="countdown" aria-label="Countdown">
+          <div class="cdBox"><span id="cdDays">00</span><small data-i18n="auction.days">يوم</small></div>
+          <div class="cdBox"><span id="cdHours">00</span><small data-i18n="auction.hours">ساعة</small></div>
+          <div class="cdBox"><span id="cdMins">00</span><small data-i18n="auction.mins">دقيقة</small></div>
+          <div class="cdBox"><span id="cdSecs">00</span><small data-i18n="auction.secs">ثانية</small></div>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- FOOTER COVER IMAGE -->
+  <section class="footerCover" aria-hidden="true">
+    <img
+      src="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto/footercover_l3vfuu"
+      alt="Footer cover"
+      loading="lazy">
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="siteFooter" id="footer" role="contentinfo">
+    <div class="fWrap">
+
+      <!-- CTA -->
+      <div class="fTop">
+        <div class="fCta">
+          <div class="fCta__text">
+            <div class="fCta__title" data-i18n="footer.cta.title">هل أنت مستعد لاكتشاف بيت التحفيات؟</div>
+            <div class="fCta__sub" data-i18n="footer.cta.sub">احجز زيارتك أو شاهد الجولة الافتراضية</div>
+          </div>
+
+          <div class="fCta__actions">
+            <a class="btn btn--primary" href="https://houseofantiques.github.io/Booking-/" data-i18n="footer.cta.book">احجز الآن</a>
+            <a class="btn btn--ghost" href="tour.html" data-i18n="footer.cta.tour">الجولة الافتراضية</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRID -->
+      <div class="fGrid">
+
+        <!-- Note -->
+        <div class="fCol fCol--about">
+          <p class="fNote" data-i18n="footer.note">
+            منصة تعريفية ثقافية توثق قصة البيت والعائلة والتحف، وتعرض خدمات الزيارات والفعاليات.
+          </p>
+
+          <div class="fAddrLine">
+            <a class="addrPill" href="https://maps.app.goo.gl/PCJQtERUQCZnT6tv6" target="_blank" rel="noopener">
+              <span class="addrIco" aria-hidden="true">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 22s7-4.4 7-11a7 7 0 1 0-14 0c0 6.6 7 11 7 11zm0-9.2a2.8 2.8 0 1 1 0-5.6 2.8 2.8 0 0 1 0 5.6z"/>
+                </svg>
+              </span>
+              <span data-i18n="footer.addr">بغداد — شارع أبو نؤاس</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick links -->
+        <div class="fCol">
+          <div class="fTitle" data-i18n="footer.quick">روابط سريعة</div>
+          <ul class="fLinks fLinks--2col">
+            <li><a href="about.html" data-i18n="footer.about">نبذة</a></li>
+            <li><a href="press.html" data-i18n="footer.press">الصحافة</a></li>
+            <li><a href="store.html" data-i18n="footer.store">المتجر</a></li>
+            <li><a href="auction.html" data-i18n="footer.auction">المزاد</a></li>
+          </ul>
+        </div>
+
+        <!-- Policies -->
+        <div class="fCol">
+          <div class="fTitle" data-i18n="footer.legal">القانون والسياسات</div>
+          <ul class="fLinks">
+            <li><a href="terms.html" data-i18n="footer.terms">الأحكام</a></li>
+            <li><a href="privacy.html" data-i18n="footer.privacy">الخصوصية</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="fCol">
+          <div class="fTitle" data-i18n="footer.contact">تواصل</div>
+
+          <div class="fIcons" aria-label="روابط التواصل">
+            <a class="ico" href="mailto:houseofantiques@gmail.com" aria-label="Email">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </a>
+
+            <a class="ico" href="https://wa.me/9647777045599" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20.5 11.9A8.5 8.5 0 1 1 11.9 3a8.5 8.5 0 0 1 8.6 8.9zm-4.1 2.4c-.2-.1-1.2-.6-1.4-.7-.2-.1-.4-.1-.5.1-.1.2-.6.7-.7.8-.1.1-.3.1-.5 0-.3-.1-1-.4-1.9-1.3-.7-.6-1.1-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.1.1-.3.1-.4 0-.1-.5-1.3-.7-1.8-.2-.5-.4-.4-.5-.4h-.4c-.1 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.1.9 2.3c.1.2 1.6 2.4 3.9 3.4.5.2.9.3 1.2.4.5.2 1 .2 1.4.1.4-.1 1.2-.5 1.3-.9.2-.4.2-.8.1-.9-.1-.1-.2-.2-.4-.3z"/>
+              </svg>
+            </a>
+
+            <a class="ico" href="tel:+9647777045599" aria-label="Call">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.4.6 3.7.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.3 21 3 13.7 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.7.1.4 0 .8-.3 1.1l-2.2 2.2z"/>
+              </svg>
+            </a>
+
+            <a class="ico" href="https://web.facebook.com/profile.php?id=61576091652992" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2.3V12h2.3V9.8c0-2.3 1.4-3.6 3.5-3.6 1 0 2 .2 2 .2v2.2h-1.1c-1.1 0-1.4.7-1.4 1.4V12h2.5l-.4 2.9h-2.1v7A10 10 0 0 0 22 12z"/>
+              </svg>
+            </a>
+
+            <a class="ico" href="https://www.instagram.com/house_ofantiques/?__pwa=1" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5a4.5 4.5 0 1 1-4.5 4.5A4.5 4.5 0 0 1 12 7.5zm0 2a2.5 2.5 0 1 0 2.5 2.5A2.5 2.5 0 0 0 12 9.5zm4.8-2.8a1.1 1.1 0 1 1-1.1-1.1 1.1 1.1 0 0 1 1.1 1.1z"/>
+              </svg>
+            </a>
+
+            <a class="ico" href="https://www.youtube.com/@house.of.antiques" target="_blank" rel="noopener" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M23.5 6.2s-.2-1.7-.9-2.4c-.9-.9-1.9-.9-2.4-1C16.9 2.5 12 2.5 12 2.5h0s-4.9 0-8.2.3c-.4.1-1.5.1-2.4 1-.7.7-.9 2.4-.9 2.4S0 8.1 0 10v1.9c0 1.9.2 3.8.2 3.8s.2 1.7.9 2.4c.9.9 2.1.9 2.6 1 1.9.2 8.3.3 8.3.3s4.9 0 8.2-.3c.4-.1 1.5-.1 2.4-1 .7-.7.9-2.4.9-2.4s.2-1.9.2-3.8V10c0-1.9-.2-3.8-.2-3.8zM9.5 14.8V7.8l6.2 3.5-6.2 3.5z"/>
+              </svg>
+            </a>
+
+            <a class="ico" href="https://maps.app.goo.gl/PCJQtERUQCZnT6tv6" target="_blank" rel="noopener" aria-label="Location">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 22s7-4.4 7-11a7 7 0 1 0-14 0c0 6.6 7 11 7 11zm0-9.2a2.8 2.8 0 1 1 0-5.6 2.8 2.8 0 0 1 0 5.6z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="fBottom">
+        <div class="fCopy" data-i18n="footer.copy">© 2026 بيت التحفيات — جميع الحقوق محفوظة</div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- MENU WIRING (اذا ما عندك هالمنطق بملفاتك) -->
+  <script>
+    (function(){
+      const menu = document.querySelector("[data-menu]");
+      const openBtn = document.querySelector("[data-menu-open]");
+      const closeBtns = document.querySelectorAll("[data-menu-close]");
+      if(!menu || !openBtn || !closeBtns.length) return;
+
+      const open = () => { menu.setAttribute("aria-hidden","false"); };
+      const close = () => { menu.setAttribute("aria-hidden","true"); };
+
+      openBtn.addEventListener("click", open);
+      closeBtns.forEach(b => b.addEventListener("click", close));
+      document.addEventListener("keydown", (e)=>{ if(e.key === "Escape") close(); });
+    })();
+  </script>
+
+</body>
+</html>

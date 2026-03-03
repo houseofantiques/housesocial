@@ -1,0 +1,306 @@
+/* =========================
+   House of Antiques — Legal Pages
+   File: legal.css
+   Works with: .legalPage .legalCard .legalHead .legalTitle .legalIntro .legalBody .legalSec .legalMeta .legalTag .legalActions .legalBtn
+   Also refines footer layout (fLinks) on legal pages
+========================= */
+
+:root{
+  --legal-bg: #070708;
+  --legal-panel: rgba(255,255,255,.06);
+  --legal-panel-2: rgba(255,255,255,.09);
+  --legal-stroke: rgba(255,255,255,.10);
+  --legal-text: rgba(255,255,255,.90);
+  --legal-muted: rgba(255,255,255,.68);
+  --legal-soft: rgba(255,255,255,.55);
+  --legal-accent: #b3202a; /* احمر غامق */
+  --legal-accent-2: rgba(179,32,42,.22);
+  --legal-radius: 18px;
+  --legal-shadow: 0 18px 55px rgba(0,0,0,.45);
+}
+
+html, body{
+  background: var(--legal-bg);
+}
+
+/* ===== Page wrapper ===== */
+.legalPage{
+  min-height: 100vh;
+  padding: clamp(22px, 4vw, 44px) 16px;
+  display: grid;
+  place-items: start center;
+}
+
+.legalCard{
+  width: min(980px, 100%);
+  background: linear-gradient(180deg, var(--legal-panel), rgba(255,255,255,.04));
+  border: 1px solid var(--legal-stroke);
+  border-radius: var(--legal-radius);
+  box-shadow: var(--legal-shadow);
+  overflow: hidden;
+}
+
+/* ===== Header ===== */
+.legalHead{
+  padding: clamp(18px, 3vw, 28px) clamp(18px, 3vw, 30px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  background:
+    radial-gradient(900px 260px at 85% -10%, rgba(179,32,42,.18), transparent 65%),
+    radial-gradient(700px 220px at 10% 0%, rgba(255,255,255,.06), transparent 60%);
+}
+
+.legalTitle{
+  margin: 0 0 10px;
+  color: var(--legal-text);
+  font-weight: 800;
+  letter-spacing: .2px;
+  font-size: clamp(22px, 2.6vw, 34px);
+  line-height: 1.25;
+}
+
+.legalIntro{
+  margin: 0;
+  color: var(--legal-muted);
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.9;
+}
+
+/* ===== Body ===== */
+.legalBody{
+  padding: clamp(18px, 3vw, 30px);
+  color: var(--legal-text);
+}
+
+.legalBody h2,
+.legalSec h2{
+  margin: 22px 0 10px;
+  font-size: clamp(16px, 1.6vw, 19px);
+  font-weight: 800;
+  color: var(--legal-text);
+  line-height: 1.4;
+}
+
+.legalBody p,
+.legalSec p{
+  margin: 0 0 14px;
+  color: var(--legal-muted);
+  line-height: 2;
+  font-size: 15px;
+}
+
+/* Section blocks (بنود) */
+.legalSec{
+  padding: 16px 16px;
+  margin: 12px 0;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.03);
+  border-radius: 14px;
+}
+
+.legalSec + .legalSec{
+  margin-top: 14px;
+}
+
+/* Lists */
+.legalBody ul{
+  margin: 10px 0 14px;
+  padding: 0 22px 0 0;
+  color: var(--legal-muted);
+  line-height: 2;
+}
+
+.legalBody li{
+  margin: 6px 0;
+}
+
+/* Links */
+.legalBody a{
+  color: rgba(255,255,255,.92);
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(255,255,255,.28);
+  padding-bottom: 1px;
+}
+.legalBody a:hover{
+  border-bottom-color: rgba(179,32,42,.65);
+}
+
+/* Divider */
+.legalDivider,
+.legalBody hr{
+  border: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent);
+  margin: 22px 0 18px;
+}
+
+/* ===== Meta tags ===== */
+.legalMeta{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0 clamp(18px, 3vw, 30px) 18px;
+}
+
+.legalTag{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  color: rgba(255,255,255,.72);
+  font-size: 13px;
+}
+
+/* ===== Actions ===== */
+.legalActions{
+  padding: 0 clamp(18px, 3vw, 30px) clamp(18px, 3vw, 28px);
+  display: flex;
+  justify-content: flex-start;
+}
+
+.legalBtn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: linear-gradient(180deg, rgba(179,32,42,.22), rgba(179,32,42,.12));
+  color: rgba(255,255,255,.92);
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 14px;
+  transition: transform .15s ease, border-color .15s ease, background .15s ease;
+}
+.legalBtn:hover{
+  transform: translateY(-1px);
+  border-color: rgba(179,32,42,.65);
+  background: linear-gradient(180deg, rgba(179,32,42,.30), rgba(179,32,42,.14));
+}
+
+/* =========================
+   Footer refinements (legal pages)
+   هدفنا: الروابط مو عمودي، تصير بسطرين/3
+========================= */
+
+.siteFooter{
+  margin-top: 26px;
+}
+
+/* خلي "روابط سريعة" و "القانون والسياسات" تتحول Wrap */
+.siteFooter .fLinks{
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px; /* سطرين/3 حسب العرض */
+}
+
+.siteFooter .fLinks li{
+  margin: 0;
+  padding: 0;
+}
+
+.siteFooter .fLinks a{
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.03);
+  color: rgba(255,255,255,.78);
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 1;
+}
+.siteFooter .fLinks a:hover{
+  border-color: rgba(179,32,42,.55);
+  color: rgba(255,255,255,.92);
+}
+
+/* icons أصغر وأنعم */
+.siteFooter .fIcons{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.siteFooter .ico{
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.03);
+  display: grid;
+  place-items: center;
+}
+.siteFooter .ico svg{
+  width: 18px;
+  height: 18px;
+  fill: rgba(255,255,255,.82);
+}
+
+/* =========================
+   Mobile polish
+========================= */
+@media (max-width: 720px){
+  .legalPage{
+    padding: 18px 12px;
+  }
+
+  .legalCard{
+    border-radius: 16px;
+  }
+
+  .legalHead{
+    padding: 18px 16px;
+  }
+
+  .legalBody{
+    padding: 18px 16px;
+  }
+
+  .legalSec{
+    padding: 14px 14px;
+  }
+
+  .legalActions{
+    padding: 0 16px 18px;
+  }
+
+  .legalBtn{
+    width: 100%;
+  }
+
+  /* Footer ترتيب أعمدة */
+  .siteFooter .fMid{
+    gap: 18px;
+  }
+
+  /* روابط الفوتر على سطرين/3 حتى بالموبايل */
+  .siteFooter .fLinks{
+    gap: 8px 10px;
+  }
+
+  .siteFooter .fLinks a{
+    padding: 7px 10px;
+    font-size: 13px;
+  }
+
+  .siteFooter .ico{
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+  }
+}
+
+/* =========================
+   Optional: better readability for RTL legal text
+========================= */
+.legalPage, .legalCard, .legalBody{
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}

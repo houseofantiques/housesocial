@@ -1,0 +1,584 @@
+:root{
+  --bg:#050505;
+  --ink:#f3f3f3;
+  --muted:rgba(255,255,255,.72);
+  --line:rgba(255,255,255,.12);
+  --shadow: 0 18px 50px rgba(0,0,0,.55);
+  --r:16px;
+  --max:1180px;
+  --accent: rgba(125,0,0,.55);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Cairo",system-ui,-apple-system,Segoe UI,Roboto,Arial;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+html{scroll-behavior:smooth; scroll-padding-top:90px;}
+
+/* =========================================================
+   TOPBAR (مثل الرئيسي: لغة يسار + روابط وسط + براند يمين)
+========================================================= */
+.hoaTopbar{
+  position: sticky;
+  top:0;
+  z-index: 1000;
+  background: rgba(0,0,0,.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.hoaTopbar__inner{
+  width: min(var(--max), calc(100% - 32px));
+  margin-inline:auto;
+  height: 70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+}
+
+/* Language button (left) */
+.langToggle{
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.06);
+  color: #fff;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-weight: 900;
+  letter-spacing:.6px;
+}
+.langToggle:hover{ background: rgba(255,255,255,.10); }
+
+/* Desktop nav (center) */
+.hoaNav{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 14px;
+  flex: 1;
+  min-width:0;
+}
+.hoaNav__link{
+  padding: 10px 10px;
+  border-radius: 12px;
+  color: rgba(255,255,255,.86);
+  font-weight: 800;
+  font-size: 13px;
+  transition: background .18s ease, transform .18s ease;
+}
+.hoaNav__link:hover{
+  background: rgba(255,255,255,.07);
+  transform: translateY(-1px);
+}
+.hoaNav__link--cta{
+  border: 1px solid rgba(255,255,255,.16);
+  background: linear-gradient(135deg, rgba(107,15,20,.70), rgba(255,255,255,.03));
+}
+
+/* Brand (right) */
+.hoaBrand{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+.hoaBrand__logo{
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  display:grid;
+  place-items:center;
+  border: 1px solid rgba(255,255,255,.18);
+  background: radial-gradient(circle at top, rgba(255,255,255,.14), rgba(255,255,255,.04));
+  box-shadow: 0 10px 22px rgba(0,0,0,.45);
+  overflow:hidden;
+}
+.hoaBrand__logo img{
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+.hoaBrand__text{
+  display:flex;
+  flex-direction:column;
+  line-height:1.05;
+  text-align:right;
+}
+.hoaBrand__title{ font-weight: 900; letter-spacing:.2px; }
+.hoaBrand__sub{ font-size: 12px; opacity: .70; }
+
+/* Mobile menu button (hidden on desktop) */
+.iconBtn{
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.04);
+  cursor:pointer;
+  display:none; /* يظهر بالموبايل */
+  align-items:center;
+  justify-content:center;
+}
+.hamburger{
+  width: 18px;
+  height: 2px;
+  background: rgba(255,255,255,.88);
+  border-radius: 999px;
+  position: relative;
+}
+.hamburger::before,
+.hamburger::after{
+  content:"";
+  position:absolute;
+  left:0;
+  width: 18px;
+  height: 2px;
+  background: rgba(255,255,255,.88);
+  border-radius:999px;
+}
+.hamburger::before{ top:-6px; }
+.hamburger::after{ top:6px; }
+
+/* Mobile layout like your reference */
+@media (max-width: 980px){
+  .hoaNav{ display:none; }
+  .iconBtn{ display:inline-flex; }
+}
+
+/* Keep header clean on small screens */
+@media (max-width: 520px){
+  .hoaTopbar__inner{
+    width: calc(100% - 24px);
+    height: 66px;
+    gap: 10px;
+  }
+  .hoaBrand__sub{ display:none; }
+  .hoaBrand__text{ display:none; } /* مثل المرجع: شعار بس */
+}
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+.mobileMenu{
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  pointer-events:none;
+  opacity: 0;
+  transition: opacity .18s ease;
+}
+.mobileMenu[aria-hidden="false"]{
+  pointer-events:auto;
+  opacity: 1;
+}
+.mobileMenu__backdrop{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,.55);
+}
+.mobileMenu__panel{
+  position:absolute;
+  top: 78px;
+  left: 12px;
+  right: 12px;
+  background: rgba(12,12,12,.96);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 20px;
+  padding: 14px;
+  box-shadow: var(--shadow);
+  max-height: 82vh;
+  overflow: auto;
+}
+.mobileMenu__close{
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  color:#fff;
+  cursor:pointer;
+  font-size: 22px;
+}
+.mobileMenu__nav{
+  display:grid;
+  gap: 14px;
+  margin-top: 10px;
+}
+.mobileMenu__group{
+  display:grid;
+  gap: 10px;
+}
+.mobileMenu__group a{
+  padding: 14px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  font-weight: 850;
+}
+.mobileMenu__group a:hover{
+  background: rgba(255,255,255,.07);
+}
+.mobileMenu__group--grid{
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+@media (max-width: 420px){
+  .mobileMenu__group--grid{ grid-template-columns: 1fr; }
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+.hero{
+  position: relative;
+  height: clamp(420px, 62vh, 620px); /* مرن: لا يصير ضخم بالموبايل */
+  overflow: hidden;
+}
+
+.hero__img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transform: scale(1.02);
+}
+
+/* بدون طبقة سوداء */
+.hero__fade{ display:none; }
+/* =========================================================
+   CONTENT PANEL
+========================================================= */
+.typePanel{
+  padding:26px 18px 40px;
+  background:linear-gradient(to bottom, rgba(0,0,0,.72), rgba(0,0,0,.92));
+  border-top:1px solid rgba(255,255,255,.10);
+}
+.typePanel__inner{
+  max-width:var(--max);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap:26px;
+  align-items:start;
+}
+.typeBlock{ margin-bottom:18px; }
+.typeLabel{
+  font-family:"Cormorant Garamond", serif;
+  letter-spacing:.22em;
+  font-size:12px;
+  opacity:.7;
+  margin-bottom:10px;
+}
+.typeBig{
+  margin:0;
+  font-size:52px;
+  line-height:1.05;
+  letter-spacing:.5px;
+}
+.typeMid{
+  margin:0;
+  color:var(--muted);
+  font-size:18px;
+  line-height:1.75;
+  max-width:46ch;
+}
+.auctionBtn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px 18px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.16);
+  background: var(--accent);
+  color:#fff;
+  font-weight:900;
+  box-shadow:0 18px 45px rgba(0,0,0,.45);
+  margin-top:10px;
+}
+.auctionBtn:hover{ filter: brightness(1.07); }
+
+/* Right side samples */
+.sample{
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--r);
+  background:rgba(255,255,255,.03);
+  padding:16px;
+  box-shadow:var(--shadow);
+  margin-bottom:16px;
+}
+.sample__letters{ font-weight:800; margin:8px 0; opacity:.9; }
+.sample__nums{ margin-top:10px; opacity:.75; }
+.sample--small .sample__letters{ font-weight:700; opacity:.85; }
+
+.countdown{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+.cdBox{
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  background:rgba(0,0,0,.35);
+  padding:12px 10px;
+  text-align:center;
+}
+.cdBox span{
+  display:block;
+  font-weight:900;
+  font-size:22px;
+}
+.cdBox small{ opacity:.7; font-weight:800; }
+
+@media (max-width: 980px){
+  .typePanel__inner{ grid-template-columns:1fr; }
+  .typeBig{ font-size:40px; }
+}
+
+/* =========================================================
+   FOOTER (سكرول أقل + نفس طابع الرئيسي)
+========================================================= */
+.footerCover{
+  width: 100%;
+  overflow:hidden;
+  margin-top: 18px;
+}
+.footerCover img{
+  width:100%;
+  height: 220px;
+  object-fit: cover;
+  object-position:center 60%;
+  opacity: .95;
+}
+@media (max-width: 720px){
+  .footerCover img{ height: 170px; }
+}
+
+.siteFooter{
+  background: #050505;
+  border-top: 1px solid rgba(255,255,255,.10);
+}
+.fWrap{
+  width: min(var(--max), calc(100% - 32px));
+  margin-inline:auto;
+  padding: 16px 0 12px;
+}
+
+.fTop{
+  padding: 0 0 14px;
+  border-bottom: 1px solid rgba(255,255,255,.10);
+}
+.fCta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+}
+.fCta__title{ font-weight: 900; font-size: 18px; }
+.fCta__sub{ margin-top:4px; font-size: 13px; color: rgba(255,255,255,.70); }
+.fCta__actions{ display:flex; gap: 10px; flex-wrap: wrap; }
+
+.btn{
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.16);
+  font-weight: 900;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.btn--primary{
+  background: linear-gradient(135deg, rgba(107,15,20,.78), rgba(255,255,255,.03));
+}
+.btn--ghost{
+  background: rgba(255,255,255,.06);
+}
+.btn:hover{ filter: brightness(1.05); }
+
+.fGrid{
+  display:grid;
+  gap: 16px;
+  grid-template-columns: 1.3fr 1fr 1fr 1fr;
+  padding: 14px 0 10px;
+}
+@media (max-width: 980px){
+  .fGrid{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px){
+  .fGrid{ grid-template-columns: 1fr; }
+}
+
+.fTitle{
+  font-weight: 900;
+  font-size: 13px;
+  margin: 2px 0 10px;
+  color: rgba(255,255,255,.92);
+}
+.fNote{
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(255,255,255,.72);
+}
+
+.fLinks{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  gap: 8px;
+}
+.fLinks--2col{
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 12px;
+}
+@media (max-width: 560px){
+  .fLinks--2col{ grid-template-columns: 1fr; }
+}
+.fLinks a{
+  color: rgba(255,255,255,.74);
+  font-size: 13px;
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  transition: .18s ease;
+}
+.fLinks a:hover{
+  color: rgba(255,255,255,.95);
+  transform: translateX(-2px);
+}
+
+.addrPill{
+  display:inline-flex;
+  align-items:center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+}
+.addrIco svg{ width: 18px; height: 18px; fill: rgba(255,255,255,.86); }
+
+.fIcons{ display:flex; flex-wrap:wrap; gap: 10px; }
+.ico{
+  width: 40px; height: 40px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  transition: .18s ease;
+}
+.ico:hover{
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.16);
+  transform: translateY(-2px);
+}
+.ico svg{ width: 18px; height: 18px; fill: rgba(255,255,255,.86); }
+
+.fBottom{
+  margin-top: 10px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,.10);
+  display:flex;
+  justify-content:center;
+}
+.fCopy{
+  font-size: 12px;
+  color: rgba(255,255,255,.58);
+  text-align:center;
+}
+
+/* CTA row responsive */
+@media (max-width: 720px){
+  .fCta{ flex-direction:column; align-items:flex-start; }
+}
+/* REMOVE HERO DARK OVERLAY */
+.hero__fade{
+  display: none !important;
+}
+/* ===== AUCTION PAGE – FIX HORIZONTAL SCROLL ===== */
+
+/* =========================================================
+   AUCTION — MOBILE FIX (NO H-SCROLL + LESS GAP)
+========================================================= */
+
+/* امنعي أي تمدد أفقي من الجذر بدون قص وحشي */
+html, body{
+  max-width: 100%;
+  overflow-x: clip; /* أفضل من hidden */
+}
+
+/* أي عنصر ممكن يسبب overflow بسبب نص طويل */
+.typeBig,
+.typeMid,
+.sample,
+.sample *{
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* HERO: قللي ارتفاع الكفر بالموبايل حتى تختفي المسافة الكبيرة */
+@media (max-width: 720px){
+  .hero{
+    height: 240px;           /* كان عالي جداً */
+    min-height: 240px;
+  }
+  .hero__img{
+    transform: none;         /* لا تكبير بالموبايل */
+    object-position: center;
+  }
+
+  /* PANEL: قللي الفراغ فوق/تحت */
+  .typePanel{
+    padding: 14px 14px 26px; /* كان 26px فوق */
+  }
+
+  /* العنوان/النص */
+  .typeBig{
+    font-size: 34px;
+    line-height: 1.08;
+    margin-top: 2px;
+  }
+  .typeMid{
+    font-size: 15px;
+    line-height: 1.75;
+    max-width: 100%;
+  }
+
+  /* مهم جداً: grid items لازم min-width:0 حتى ما تتمدد وتسبب سكرول */
+  .typePanel__inner{
+    grid-template-columns: 1fr;
+    gap: 14px;
+    min-width: 0;
+  }
+  .typePanel__inner > *{
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  /* العدّاد: خلّيه 2×2 حتى ما يطلع برا */
+  .countdown{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+/* لو شاشات اصغر جداً */
+@media (max-width: 360px){
+  .hero{ height: 220px; min-height: 220px; }
+  .typeBig{ font-size: 30px; }
+}

@@ -1,0 +1,1114 @@
+:root{
+  --bg:#070708;
+  --bg2:#0b0b0d;
+  --paper:#efe7d6;
+  --paper2:#f4efdf;
+
+  --w: 1120px;
+
+  --text:#f1f1f1;
+  --muted: rgba(255,255,255,.74);
+  --muted2: rgba(255,255,255,.58);
+
+  --ink:#121212;
+  --ink2:#2a2a2a;
+
+  --lineDark: rgba(255,255,255,.10);
+  --lineLight: rgba(0,0,0,.10);
+
+  --accent:#7b0f12;
+  --radius: 20px;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body.hoa{
+  margin:0;
+  background: var(--bg);
+  color: var(--text);
+  font-family:"Cairo", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-weight: 400;
+  letter-spacing: .15px;
+}
+
+/* ===== Topbar ===== */
+hoaTopbar{
+  position: sticky;
+  top:0;
+  z-index: 1000;
+  background: rgba(0,0,0,.72);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.hoaTopbar__inner{
+  width: min(var(--max), calc(100% - 32px));
+  margin-inline:auto;
+  height: 70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+}
+
+/* Left (mobile only) */
+.hoaTopbar__left{ display:flex; align-items:center; gap:10px; }
+@media (min-width: 980px){
+  .hoaTopbar__left{ display:none; }
+}
+
+/* Icon button */
+.iconBtn{
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.04);
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.hamburger{
+  width: 18px;
+  height: 2px;
+  background: rgba(255,255,255,.88);
+  border-radius: 999px;
+  position: relative;
+}
+.hamburger::before,
+.hamburger::after{
+  content:"";
+  position:absolute;
+  left:0;
+  width: 18px;
+  height: 2px;
+  background: rgba(255,255,255,.88);
+  border-radius:999px;
+}
+.hamburger::before{ top:-6px; }
+.hamburger::after{ top:6px; }
+
+/* Brand */
+.hoaBrand{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  min-width: 220px;
+}
+.hoaBrand__logo{
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  display:grid;
+  place-items:center;
+  border: 1px solid rgba(255,255,255,.18);
+  background: radial-gradient(circle at top, rgba(255,255,255,.14), rgba(255,255,255,.04));
+  box-shadow: 0 10px 22px rgba(0,0,0,.45);
+  overflow:hidden;
+  flex: 0 0 auto;
+}
+.hoaBrand__logo img{
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+.hoaBrand__text{
+  display:flex;
+  flex-direction:column;
+  line-height:1.05;
+}
+.hoaBrand__title{ font-weight: 900; letter-spacing:.2px; }
+.hoaBrand__sub{ font-size: 12px; opacity: .70; }
+
+/* Desktop nav */
+.hoaNav{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  gap: 14px;
+  flex: 1;
+  min-width:0;
+}
+.hoaNav__link{
+  padding: 10px 10px;
+  border-radius: 12px;
+  color: rgba(255,255,255,.86);
+  font-weight: 800;
+  font-size: 13px;
+  transition: background .18s ease;
+}
+.hoaNav__link:hover{ background: rgba(255,255,255,.07); }
+.hoaNav__link--cta{
+  border: 1px solid rgba(255,255,255,.16);
+  background: linear-gradient(135deg, rgba(107,15,20,.70), rgba(255,255,255,.03));
+}
+@media (min-width: 980px){
+  .hoaNav{ display:flex; }
+}
+
+/* Right */
+.hoaTopbar__right{ display:flex; align-items:center; gap: 10px; }
+.langToggle{
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.06);
+  color: #fff;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-weight: 900;
+  letter-spacing:.6px;
+}
+.langToggle:hover{
+  background: rgba(255,255,255,.10);
+}
+
+/* Small screens: keep topbar clean */
+@media (max-width: 520px){
+  .hoaTopbar__inner{
+    width: calc(100% - 24px);
+    height: 66px;
+    gap: 10px;
+  }
+  .hoaBrand{ min-width: auto; }
+  .hoaBrand__sub{ display:none; }
+}
+
+/* =========================================================
+   3) MOBILE MENU (your HTML: .mobileMenu)
+========================================================= */
+.mobileMenu{
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  pointer-events:none;
+  opacity: 0;
+  transition: opacity .18s ease;
+}
+.mobileMenu[aria-hidden="false"]{
+  pointer-events:auto;
+  opacity: 1;
+}
+
+.mobileMenu__backdrop{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,.55);
+}
+
+.mobileMenu__panel{
+  position:absolute;
+  top: 78px;
+  left: 12px;
+  right: 12px;
+  background: rgba(12,12,12,.96);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: var(--shadow);
+}
+
+.mobileMenu__close{
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  color:#fff;
+  cursor:pointer;
+  font-size: 22px;
+}
+
+.mobileMenu__nav{
+  display:grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+.mobileMenu__nav a{
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  font-weight: 850;
+}
+
+/* ===== COVER (Facebook cover ratio) ===== */
+.cover{
+  position: relative;
+  border-bottom: 1px solid var(--lineDark);
+  background: #000;
+}
+.cover__media{
+  width: 100%;
+  aspect-ratio: 820 / 312; /* فيسبوك */
+  max-height: 560px;
+  overflow:hidden;
+}
+.cover__media img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  display:block;
+}
+.cover__overlay{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(900px 500px at 70% 20%, rgba(0,0,0,.18), rgba(0,0,0,.76)),
+    linear-gradient(to bottom, rgba(0,0,0,.18), rgba(0,0,0,.78));
+  pointer-events:none;
+}
+.cover__content{
+  position:absolute;
+  inset:0;
+  max-width: var(--w);
+  margin: 0 auto;
+  padding: 64px 16px 40px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  gap: 10px;
+}
+
+.kicker{
+  display:inline-block;
+  width: fit-content;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(0,0,0,.22);
+  font-weight: 800;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+.title{
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
+  letter-spacing:.2px;
+  font-size: clamp(34px, 4vw, 56px);
+  line-height: 1.05;
+}
+.sub{
+  margin: 0;
+  max-width: 820px;
+  color: rgba(255,255,255,.82);
+  font-weight: 450;
+  line-height: 1.9;
+}
+.fine{
+  color: rgba(255,255,255,.68);
+  font-weight: 450;
+  max-width: 760px;
+}
+
+.ctaRow{ display:flex; gap: 12px; flex-wrap:wrap; margin-top: 6px; }
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap: 10px;
+  height: 52px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.08);
+  color:#fff;
+  text-decoration:none;
+  font-weight: 800;
+  letter-spacing:.15px;
+}
+.btn:hover{ background: rgba(255,255,255,.12); }
+.btn__ic{ font-size: 18px; }
+.btn--wa{
+  background: rgba(16, 84, 40, .22);
+  border-color: rgba(64, 200, 120, .26);
+}
+.btn--wa:hover{ background: rgba(16, 84, 40, .32); }
+.btn--mail{ background: rgba(255,255,255,.08); }
+.btn--sm{ height: 46px; padding: 0 16px; }
+
+/* ===== Panels (like slides) ===== */
+.panel{
+  padding: 58px 0;
+}
+.panel--dark{
+  background: var(--bg2);
+  border-bottom: 1px solid var(--lineDark);
+}
+.panel--paper{
+  background: linear-gradient(180deg, var(--paper), var(--paper2));
+  color: var(--ink);
+  border-bottom: 1px solid var(--lineLight);
+}
+.panel__inner{
+  max-width: var(--w);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+.twoCol{
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 28px;
+  align-items:center;
+}
+.twoCol--flip{
+  grid-template-columns: .9fr 1.1fr;
+}
+.twoCol--flip .text{ order: 2; }
+.twoCol--flip .art{ order: 1; }
+
+.oneCol{ text-align:center; }
+
+.h2{
+  margin:0 0 12px;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
+  font-size: clamp(22px, 2.2vw, 34px);
+}
+.p{
+  margin:0 0 14px;
+  font-weight: 450;
+  line-height: 2.0;
+  color: inherit;
+  opacity: .92;
+}
+.p.small{ font-size: 14px; opacity:.85; }
+.center{ text-align:center; }
+.max{ max-width: 860px; margin-left:auto; margin-right:auto; }
+
+.ul{
+  margin: 0;
+  padding: 0 18px 0 0;
+  line-height: 2.0;
+  font-weight: 450;
+  opacity: .92;
+}
+.lineNote{
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,.10);
+  color: rgba(255,255,255,.78);
+  font-weight: 600;
+}
+.panel--paper .lineNote{
+  border-top-color: rgba(0,0,0,.10);
+  color: rgba(0,0,0,.70);
+}
+
+.art img{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 18px 45px rgba(0,0,0,.22);
+}
+.panel--paper .art img{
+  border-color: rgba(0,0,0,.10);
+  box-shadow: 0 18px 45px rgba(0,0,0,.10);
+}
+
+.contactStrip{
+  margin-top: 22px;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: var(--radius);
+  padding: 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 14px;
+  background: rgba(255,255,255,.04);
+}
+.contactStrip__text{
+  font-weight: 700;
+}
+.contactStrip__text span{
+  display:inline-block;
+  margin: 0 10px;
+  color: rgba(255,255,255,.78);
+  font-weight: 500;
+}
+.contactStrip__actions{ display:flex; gap: 10px; flex-wrap:wrap; }
+
+/* ===== Footer ===== */
+.footerCover{
+  width: 100%;
+  overflow:hidden;
+  margin-top: 26px;
+}
+.footerCover img{
+  width:100%;
+  height: 240px;
+  object-fit: cover;
+  object-position:center 60%;
+  opacity: .95;
+}
+@media (max-width: 720px){
+  .footerCover img{ height: 180px; }
+}
+
+/* Footer wrapper */
+.siteFooter{
+  background: #050505;
+  border-top: 1px solid rgba(255,255,255,.10);
+}
+.fWrap{
+  width: min(var(--max), calc(100% - 32px));
+  margin-inline:auto;
+  padding: 18px 0 14px; /* أقل = سكرول أقل */
+}
+
+/* CTA row */
+.fTop{ padding: 0 0 14px; border-bottom: 1px solid rgba(255,255,255,.10); }
+.fCta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+}
+.fCta__title{ font-weight: 900; font-size: 18px; }
+.fCta__sub{ margin-top:4px; font-size: 13px; color: rgba(255,255,255,.70); }
+.fCta__actions{ display:flex; gap: 10px; flex-wrap: wrap; }
+
+/* Your footer buttons (keep .btn naming from your HTML) */
+.btn{
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.16);
+  font-weight: 900;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.btn--primary{
+  background: linear-gradient(135deg, rgba(107,15,20,.78), rgba(255,255,255,.03));
+}
+.btn--ghost{
+  background: rgba(255,255,255,.06);
+}
+.btn:hover{ filter: brightness(1.05); }
+
+/* Grid */
+.fGrid{
+  display:grid;
+  gap: 16px;
+  grid-template-columns: 1.3fr 1fr 1fr 1fr;
+  padding: 14px 0 10px;
+}
+@media (max-width: 980px){
+  .fGrid{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px){
+  .fGrid{ grid-template-columns: 1fr; }
+}
+
+.fTitle{
+  font-weight: 900;
+  font-size: 13px;
+  margin: 2px 0 10px;
+  color: rgba(255,255,255,.92);
+}
+.fNote{
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(255,255,255,.72);
+}
+.fLinks{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  gap: 8px;
+}
+.fLinks--2col{
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 12px;
+}
+@media (max-width: 560px){
+  .fLinks--2col{ grid-template-columns: 1fr; }
+}
+
+.fLinks a{
+  color: rgba(255,255,255,.74);
+  font-size: 13px;
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  transition: .18s ease;
+}
+.fLinks a:hover{
+  color: rgba(255,255,255,.95);
+  transform: translateX(-2px);
+}
+
+/* Address pill */
+.addrPill{
+  display:inline-flex;
+  align-items:center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+}
+.addrIco svg{
+  width: 18px; height: 18px;
+  fill: rgba(255,255,255,.86);
+}
+
+/* Social icons */
+.fIcons{ display:flex; flex-wrap:wrap; gap: 10px; }
+.ico{
+  width: 40px; height: 40px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  transition: .18s ease;
+}
+.ico:hover{
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.16);
+  transform: translateY(-2px);
+}
+.ico svg{ width: 18px; height: 18px; fill: rgba(255,255,255,.86); }
+
+.fBottom{
+  margin-top: 10px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,.10);
+  display:flex;
+  justify-content:center;
+}
+.fCopy{
+  font-size: 12px;
+  color: rgba(255,255,255,.58);
+  text-align:center;
+}
+
+/* Scroll padding for anchor links (topbar) */
+html{ scroll-behavior: smooth; scroll-padding-top: 90px; }
+.mobileMenu__panel{
+  max-height: 82vh;
+  overflow: hidden; /* يمنع سكرول */
+  padding: 18px;
+  border-radius: 20px;
+}
+
+.mobileMenu__nav{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* grouping */
+.mobileMenu__group{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* grid for sections */
+.mobileMenu__group--grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 14px;
+}
+
+/* legal smaller */
+.mobileMenu__group--legal a{
+  font-size: 12px;
+  opacity: .75;
+}
+
+/* links style */
+.mobileMenu__nav a{
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+
+  font-weight: 600;        /* أنعم */
+  font-size: 14px;         /* أصغر شوي */
+  letter-spacing: .3px;
+  transition: .18s ease;
+}
+
+.mobileMenu__nav a:hover{
+  background: rgba(255,255,255,.10);
+  transform: translateY(-1px);
+}
+/* ================================
+   MOBILE FIX – inspection page
+   الصقه بنهاية ملف CSS
+================================ */
+
+@media (max-width: 560px){
+
+  /* تصغير ارتفاع التوب بار */
+  .topbar__inner{
+    height: 64px;
+    padding: 0 12px;
+  }
+
+  /* تحويل كفر فيسبوك إلى نسبة مناسبة للهاتف */
+  .cover__media{
+    aspect-ratio: 16 / 9 !important;
+    max-height: none !important;
+  }
+
+  /* ضبط محتوى الهيرو */
+  .cover__content{
+    padding: 20px 12px 18px;
+    gap: 8px;
+  }
+
+  .title{
+    font-size: 26px !important;
+    line-height: 1.15;
+  }
+
+  .sub{
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .fine{
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* الأزرار عمودية وبعرض كامل */
+  .ctaRow{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn{
+    width: 100%;
+    height: 48px;
+    justify-content: center;
+  }
+
+  /* تحويل الأقسام إلى عمود واحد */
+  .twoCol,
+  .twoCol--flip{
+    grid-template-columns: 1fr !important;
+  }
+
+  .twoCol--flip .text,
+  .twoCol--flip .art{
+    order: unset !important;
+  }
+
+  /* تقليل padding الأقسام */
+  .panel{
+    padding: 40px 0;
+  }
+
+  .panel__inner{
+    padding: 0 12px;
+  }
+
+  /* تحسين قراءة العناوين */
+  .h2{
+    font-size: 22px;
+  }
+
+  /* الصورة العرضية 100% بدون ضغط */
+  .art img{
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+  }
+
+  /* الفوتر عمود واحد */
+  .footer__cols{
+    grid-template-columns: 1fr !important;
+  }
+
+}
+/* =========================
+   TOPBAR CLEAN FIX
+========================= */
+
+.topbar{
+  background: rgba(0,0,0,.75) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.topbar__inner{
+  height: 60px !important;
+}
+
+.brand__name{
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+
+/* تصغير زر اللغة إذا موجود */
+.langBtn,
+.arBtn,
+.topbar .lang{
+  width: 38px !important;
+  height: 38px !important;
+  font-size: 13px !important;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.15);
+  background: rgba(255,255,255,.05);
+}
+
+/* تصغير زر القائمة */
+.menuBtn{
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 12px;
+}
+/* =========================
+   BUTTON SOFT STYLE
+========================= */
+
+.btn{
+  height: 44px !important;
+  padding: 0 16px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  letter-spacing: .2px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+}
+
+/* واتساب أنعم */
+.btn--wa{
+  background: rgba(16,84,40,.18) !important;
+  border: 1px solid rgba(64,200,120,.25) !important;
+}
+
+.btn--wa:hover{
+  background: rgba(16,84,40,.28) !important;
+}
+
+/* ايميل أخف */
+.btn--mail{
+  background: rgba(255,255,255,.06) !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+}
+
+.btn--mail:hover{
+  background: rgba(255,255,255,.12) !important;
+}
+
+/* تصغير الأيقونات داخل الزر */
+.btn__ic{
+  font-size: 15px !important;
+}
+/* =========================
+   MOBILE BUTTON FIX (NOT FULL WIDTH)
+========================= */
+@media (max-width: 560px){
+
+  .ctaRow{
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* يخليها بالنص */
+    gap: 10px;
+  }
+
+  .btn{
+    width: auto !important;        /* يشيل عرض 100% */
+    max-width: 85%;                /* ما تتمدد */
+    height: 38px !important;       
+    padding: 0 18px !important;
+    font-size: 13px !important;
+    justify-content: center;
+  }
+
+}
+/* =========================
+   FIX LOGO SIZE + REMOVE UNDERLINES
+========================= */
+
+/* 1) خلي اللوكو يملأ الدائرة (مو أصغر) */
+.hoaBrand__logo{
+  overflow: hidden; /* حتى يبقى داخل الدائرة */
+}
+
+.hoaBrand__logo img{
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;   /* يملأ الدائرة */
+  display: block;
+}
+
+/* 2) شيل أي خطوط تحت النص (underline / borders) */
+.hoaBrand__title,
+.hoaBrand__sub,
+.hoaBrand__title a,
+.hoaBrand__sub a,
+.hoaTopbar a{
+  text-decoration: none !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+
+/* إذا عندك ستايل يضيف خط عند hover */
+.hoaTopbar a:hover{
+  text-decoration: none !important;
+  border-bottom: 0 !important;
+}
+/* =========================
+   MOBILE – LOGO ONLY
+   اخفاء نص الشعار بالموبايل
+========================= */
+
+@media (max-width: 768px){
+
+  /* اخفاء النص */
+  .hoaBrand__text{
+    display: none !important;
+  }
+
+  /* تصغير الشعار حتى يبين مرتب */
+  .hoaBrand__logo{
+    width: 40px;
+    height: 40px;
+  }
+
+  .hoaBrand__logo img{
+    width: 24px;
+    height: 24px;
+  }
+
+  /* تقليل المسافة حتى ما يصير فراغ */
+  .hoaBrand{
+    gap: 0 !important;
+    min-width: auto !important;
+  }
+
+}
+/* =========================
+   TOPBAR TEXT FORCE WHITE
+   صفحة التقييم
+========================= */
+
+/* اسم بيت التحفيات */
+.hoaBrand__title,
+.hoaBrand__title a,
+.hoaBrand__sub,
+.hoaBrand__text{
+  color: #ffffff !important;
+}
+
+/* روابط الناف */
+.hoaNav__link{
+  color: #ffffff !important;
+}
+
+.hoaNav__link:hover{
+  color: #ffffff !important;
+  background: rgba(255,255,255,.08);
+}
+
+/* إذا كان العنوان رابط */
+.hoaBrand a{
+  color: #ffffff !important;
+  text-decoration: none;
+}
+
+/* منع أي لون بنفسجي افتراضي */
+.hoaTopbar a{
+  color: #ffffff !important;
+}
+/* =================================
+   FOOTER LINK FIX (REMOVE BLUE + UNDERLINE)
+================================= */
+
+/* أي رابط داخل الفوتر */
+.siteFooter a,
+.siteFooter a:visited{
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+/* زر العنوان (بغداد — شارع أبو نؤاس) */
+.addrPill,
+.addrPill a{
+  color: #ffffff !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+/* منع اللون الأزرق الافتراضي */
+.siteFooter a:hover{
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+
+/* =================================
+   CTA SECTION FIX (هل أنت مستعد...)
+================================= */
+
+/* ترتيب افقي نظيف */
+.fCta{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* خلي العنوان بس سطرين مرتب */
+.fCta__title{
+  line-height: 1.3;
+  font-size: 22px;
+  max-width: 520px;
+}
+
+/* وصف تحت العنوان */
+.fCta__sub{
+  font-size: 14px;
+  opacity: .75;
+}
+
+/* بالموبايل نخليه مرتب بدون ما يتمدد */
+@media (max-width: 768px){
+
+  .fCta{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .fCta__title{
+    font-size: 18px;
+    line-height: 1.4;
+    max-width: 100%;
+  }
+
+  .fCta__actions{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+}
+/* =========================
+   TOPBAR HARD FIX (works for tag + class)
+   يمنع تراكب الهيرو + يرجع التوب بار
+========================= */
+
+:root{ --tbH: 74px; }
+
+@media (max-width: 768px){
+  :root{ --tbH: 66px; }
+}
+
+/* استهداف التوب بار سواء كان <hoaTopbar> أو class */
+hoaTopbar,
+.hoaTopbar{
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 5000 !important;
+  display: block !important;
+  background: rgba(0,0,0,.82) !important;
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+/* ارتفاع الداخلي */
+hoaTopbar .hoaTopbar__inner,
+.hoaTopbar .hoaTopbar__inner{
+  height: var(--tbH) !important;
+}
+
+/* نعطي مساحة للمحتوى كله حتى ما يركب تحت التوب بار */
+body.hoa{
+  padding-top: var(--tbH) !important;
+}
+
+/* إلغاء أي دفع سابق للهيرو حتى ما يخرب */
+.cover{ margin-top: 0 !important; }
+
+/* =========================
+   TOPBAR HARD FIX (works for tag + class)
+   يمنع تراكب الهيرو + يرجع التوب بار
+========================= */
+
+:root{ --tbH: 74px; }
+
+@media (max-width: 768px){
+  :root{ --tbH: 66px; }
+}
+
+/* استهداف التوب بار سواء كان <hoaTopbar> أو class */
+hoaTopbar,
+.hoaTopbar{
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 5000 !important;
+  display: block !important;
+  background: rgba(0,0,0,.82) !important;
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+/* ارتفاع الداخلي */
+hoaTopbar .hoaTopbar__inner,
+.hoaTopbar .hoaTopbar__inner{
+  height: var(--tbH) !important;
+}
+
+/* نعطي مساحة للمحتوى كله حتى ما يركب تحت التوب بار */
+body.hoa{
+  padding-top: var(--tbH) !important;
+}
+
+/* إلغاء أي دفع سابق للهيرو حتى ما يخرب */
+.cover{ margin-top: 0 !important; }
+/* =================================
+   SMALL CTA BUTTONS – INSPECTION HERO
+================================= */
+
+/* تصغير أزرار الهيرو فقط */
+.cover .btn,
+.cover .btn--wa,
+.cover .btn--mail{
+  height: 26px !important;        /* أقل من النص */
+  padding: 0 10px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  border-radius: 999px !important;
+  gap: 6px !important;
+}
+
+/* تصغير الأيقونات داخل الزر */
+.cover .btn__ic{
+  font-size: 12px !important;
+}
+
+/* بالموبايل نخليها أصغر بعد */
+@media (max-width: 560px){
+  .cover .btn{
+    height: 24px !important;
+    font-size: 10.5px !important;
+    padding: 0 8px !important;
+  }
+}

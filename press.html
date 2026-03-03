@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="press.tabTitle">الصحافة | بيت التحفيات</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Global site -->
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Press page only -->
+  <link rel="stylesheet" href="press.css" />
+</head>
+
+<body class="page-press">
+
+  <!-- TOPBAR (same classes as home) -->
+  <header class="hoaTopbar" role="banner">
+    <div class="hoaTopbar__inner">
+
+      <!-- LEFT (mobile only) -->
+      <div class="hoaTopbar__left">
+        <button class="iconBtn iconBtn--menu" type="button" aria-label="Menu" data-menu-open>
+          <span class="hamburger" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <!-- BRAND -->
+      <a class="hoaBrand" href="index.html" aria-label="House of Antiques">
+        <span class="hoaBrand__logo">
+          <img
+            src="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto/logo"
+            alt="House of Antiques"
+            loading="lazy"
+            onerror="this.onerror=null;this.src='logo.png';"
+          />
+        </span>
+        <span class="hoaBrand__text">
+          <span class="hoaBrand__title" data-i18n="brandTitle">بيت التحفيات</span>
+          <span class="hoaBrand__sub" data-i18n="brandSub">House of Antiques</span>
+        </span>
+      </a>
+
+      <!-- DESKTOP NAV -->
+      <nav class="hoaNav" aria-label="Primary">
+        <a class="hoaNav__link" href="about.html" data-i18n="navAbout">نبذة</a>
+        <a class="hoaNav__link" href="index.html#entrances" data-i18n="navExplore">استكشف</a>
+        <a class="hoaNav__link is-active" href="press.html" data-i18n="footer.press">الصحافة</a>
+        <a class="hoaNav__link" href="tour.html" data-i18n="navTour">جولة افتراضية</a>
+        <a class="hoaNav__link hoaNav__link--cta" href="#footer" data-i18n="navContact">تواصل</a>
+      </nav>
+
+      <!-- RIGHT (LANG) — FIXED to work with i18n.js (data-lang) -->
+      <div class="hoaTopbar__right" role="group" aria-label="Language switcher">
+        <button class="langToggle" type="button" data-lang="ar" aria-pressed="true">AR</button>
+        <button class="langToggle" type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MOBILE MENU (same behavior as home) -->
+  <div class="mobileMenu" data-menu aria-hidden="true">
+    <div class="mobileMenu__backdrop" data-menu-close></div>
+
+    <div class="mobileMenu__panel" role="dialog" aria-modal="true" aria-label="Menu">
+      <button class="mobileMenu__close" type="button" aria-label="Close" data-menu-close>×</button>
+
+      <nav class="mobileMenu__nav" aria-label="Mobile">
+
+        <!-- MAIN -->
+        <div class="mobileMenu__group">
+          <a href="index.html" data-i18n="navHome">الرئيسية</a>
+          <a href="about.html" data-i18n="navAbout">نبذة</a>
+          <a href="index.html#entrances" data-i18n="navExplore">استكشف</a>
+        </div>
+
+        <!-- CTAs (7) -->
+        <div class="mobileMenu__group mobileMenu__group--grid">
+          <a href="about.html" data-i18n="ex1T">نبذة عن بيت التحفيات</a>
+          <a href="https://houseofantiques.github.io/mtjer01/" target="_blank" rel="noopener" data-i18n="goStore">ادخل المتجر</a>
+          <a href="https://houseofantiques.github.io/Booking-/" target="_blank" rel="noopener" data-i18n="goBooking">اذهب للحجز</a>
+          <a href="press.html" class="is-active" data-i18n="goPress">الصحافة</a>
+          <a href="auction.html" data-i18n="goAuction">تفاصيل المزاد</a>
+          <a href="tour.html" data-i18n="goTour">ابدأ الجولة</a>
+          <a href="inspection.html" data-i18n="inspectBtn">ابدأ الطلب</a>
+        </div>
+
+        <!-- Policies -->
+        <div class="mobileMenu__group mobileMenu__group--legal">
+          <a href="terms.html" data-i18n="footer.terms">الأحكام</a>
+          <a href="privacy.html" data-i18n="footer.privacy">الخصوصية</a>
+          <a href="#footer" data-i18n="navContact">تواصل</a>
+        </div>
+
+      </nav>
+    </div>
+  </div>
+
+  <main class="pressMain">
+
+    <!-- HERO (edge-to-edge) -->
+    <section class="pressHero" aria-label="مقدمة الصحافة" data-i18n-aria="press.heroAria">
+      <img
+        class="pressHero__img"
+        src="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto/assetscard-press_qipcaa"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        onerror="this.onerror=null;this.src='assetscard-press.jpg';"
+      />
+      <div class="pressHero__overlay" aria-hidden="true"></div>
+
+      <div class="pressHero__inner">
+
+        <h1 class="pressHero__title" data-i18n="press.heroTitle">
+          ما كتبته الصحف والمجلات عن بيت التحفيات
+        </h1>
+
+        <p class="pressHero__sub" data-i18n="press.heroSub">
+          مقالات • لقاءات • أرشيف… توثيق بصري مرتب
+        </p>
+
+        <div class="pressHero__actions">
+          <a class="pressHero__btn" href="#archive" data-i18n="press.heroCta1">ابدأ الأرشيف</a>
+          <a class="pressHero__btn pressHero__btn--ghost" href="#footer" data-i18n="press.heroCta2">تواصل</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOOLS -->
+    <section class="pressTools" aria-label="أدوات الصحافة" data-i18n-aria="press.controlsAria">
+      <div class="wrap">
+        <div class="pressTools__row">
+          <div class="chipsWrap">
+            <div class="chipsTitle" data-i18n="press.year">السنة</div>
+            <div id="yearChips" class="chips" aria-label="تصفية حسب السنة" data-i18n-aria="press.yearFilterAria"></div>
+          </div>
+
+          <div class="pressSearch" role="search" aria-label="بحث" data-i18n-aria="press.searchAria">
+            <input
+              id="pressSearch"
+              type="search"
+              placeholder="بحث سريع…"
+              aria-label="بحث"
+              data-i18n-placeholder="press.searchPh"
+              data-i18n-aria="press.searchAria"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARCHIVE -->
+    <section class="archive" id="archive" aria-label="أرشيف الصحافة" data-i18n-aria="press.archiveAria">
+      <div class="wrap">
+        <div class="archive__head">
+          <h2 class="archive__title" data-i18n="press.itemsTitle">المواد</h2>
+          <p class="archive__sub" data-i18n="press.itemsSub">شبكة عرض متحفية — فهرسة + بحث سريع</p>
+        </div>
+      </div>
+
+      <div id="pressGrid" class="pressGrid" aria-live="polite">
+
+        <!-- 1 -->
+        <article class="pressCard" data-press-item
+          data-year="1971"
+data-title="رجل مهنته البحث عن الحلي القديمة"
+data-source="جريدة التآخي — الخميس 22 تموز 1971"
+data-full="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto,w_2000/press1_zw9qeq">
+<img src="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto/press1_zw9qeq"
+     alt="رجل مهنته البحث عن الحلي القديمة"
+     loading="lazy"
+     data-i18n-alt="press.n1.title" />
+<div class="pressMeta">
+  <div class="pressYear">1971</div>
+  <div class="pressTitle" data-i18n="press.n1.title">
+    رجل مهنته البحث عن الحلي القديمة
+  </div>
+  <div class="pressSource" data-i18n="press.n1.source">
+    جريدة التآخي — الخميس 22 تموز 1971
+  </div>
+</div>
+        </article>
+
+        <!-- 2 -->
+        <article class="pressCard" data-press-item
+          data-year="1973"
+data-title="الزمن والأشياء في بيت التحفيات"
+data-source="جريدة الجمهورية — الخميس 23 آب 1973"
+data-full="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto,w_2000/press2_nraiqh">
+<img src="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto/press2_nraiqh"
+     alt="الزمن والأشياء في بيت التحفيات"
+     loading="lazy"
+     data-i18n-alt="press.n2.title" />
+<div class="pressMeta">
+  <div class="pressYear">1973</div>
+  <div class="pressTitle" data-i18n="press.n2.title">
+    الزمن والأشياء في بيت التحفيات
+  </div>
+  <div class="pressSource" data-i18n="press.n2.source">
+    جريدة الجمهورية — الخميس 23 آب 1973
+  </div>
+</div>
+        </article>
+
+        <!-- 3 -->
+        <article class="pressCard" data-press-item
+          data-year="1989"
+data-title="وفاءً لأمنية والده أقام بيت التحفيات"
+data-source="جريدة الثورة — الخميس 1 حزيران 1989"
+data-full="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto,w_2000/press3_grbini">
+<img src="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto/press3_grbini"
+     alt="وفاءً لأمنية والده أقام بيت التحفيات"
+     loading="lazy"
+     data-i18n-alt="press.n3.title" />
+<div class="pressMeta">
+  <div class="pressYear">1989</div>
+  <div class="pressTitle" data-i18n="press.n3.title">
+    وفاءً لأمنية والده أقام بيت التحفيات
+  </div>
+  <div class="pressSource" data-i18n="press.n3.source">
+    جريدة الثورة — الخميس 1 حزيران 1989
+  </div>
+</div>
+        </article>
+
+        <!-- 4 -->
+        <article class="pressCard" data-press-item
+          data-year="1989"
+          data-year="1989"
+data-title="بيت أم متحف للتحفيات البغدادية؟"
+data-source="جريدة الجمهورية — السبت 14 تشرين الأول 1989"
+data-full="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto,w_2000/press4_reidth">
+<img src="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto/press4_reidth"
+     alt="بيت أم متحف للتحفيات البغدادية؟"
+     loading="lazy"
+     data-i18n-alt="press.n4.title" />
+<div class="pressMeta">
+  <div class="pressYear">1989</div>
+  <div class="pressTitle" data-i18n="press.n4.title">
+    بيت أم متحف للتحفيات البغدادية؟
+  </div>
+  <div class="pressSource" data-i18n="press.n4.source">
+    جريدة الجمهورية — السبت 14 تشرين الأول 1989
+  </div>
+</div>
+        </article>
+
+<!-- 5 -->
+<article class="pressCard" data-press-item
+  data-year="1990"
+  data-title="متحف صغير لبيع مخلفات الماضي الجميل"
+  data-source="جريدة النداء (الكويت) — كانون الأول 1990"
+  data-full="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto,w_2000/press5_sxpun2">
+
+  <img src="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto/press5_sxpun2"
+       alt="متحف صغير لبيع مخلفات الماضي الجميل"
+       loading="lazy"
+       data-i18n-alt="press.n5.title" />
+
+  <div class="pressMeta">
+    <div class="pressYear">1990</div>
+    <div class="pressTitle" data-i18n="press.n5.title">متحف صغير لبيع مخلفات الماضي الجميل</div>
+    <div class="pressSource" data-i18n="press.n5.source">جريدة النداء (الكويت) — كانون الأول 1990</div>
+  </div>
+</article>
+
+<!-- 6 -->
+<article class="pressCard" data-press-item
+  data-year="2002"
+  data-title="حوار مجلة ألف باء مع الحفيدة هندرين طارق الألماني (مقتطف)"
+  data-source="Issue No. 1786 — Wednesday, December 18, 2002"
+  data-full="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto,w_2000/press6_lnllo9">
+
+  <img src="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto/press6_lnllo9"
+       alt="حوار مجلة ألف باء (مقتطف)"
+       loading="lazy"
+       data-i18n-alt="press.n6.title" />
+
+  <div class="pressMeta">
+    <div class="pressYear">2002</div>
+    <div class="pressTitle" data-i18n="press.n6.title">حوار مجلة ألف باء مع الحفيدة هندرين طارق الألماني (مقتطف)</div>
+    <div class="pressSource" data-i18n="press.n6.source">Issue No. 1786 — Wednesday, December 18, 2002</div>
+  </div>
+</article>
+
+<!-- 7 (year=0) -->
+<article class="pressCard" data-press-item
+  data-year="0"
+  data-title="أخيراً… أصبحت الآثار موطنها بغداد"
+  data-source="مجلة بغداد (باللغة الفرنسية) — لقاء مع طارق محمد علي"
+  data-full="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto,w_2000/press7_za8dwt">
+
+  <img src="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto/press7_za8dwt"
+       alt="أخيراً… أصبحت الآثار موطنها بغداد"
+       loading="lazy"
+       data-i18n-alt="press.n7.title" />
+
+  <div class="pressMeta">
+    <div class="pressYear">—</div>
+    <div class="pressTitle" data-i18n="press.n7.title">أخيراً… أصبحت الآثار موطنها بغداد</div>
+    <div class="pressSource" data-i18n="press.n7.source">مجلة بغداد (باللغة الفرنسية) — لقاء مع طارق محمد علي</div>
+  </div>
+</article>
+
+<!-- 8 (year=0) -->
+<article class="pressCard" data-press-item
+  data-year="0"
+  data-title="البيوت القديمة تحولت إلى متاحف — بغداد ترد الصفعة لهولاكو"
+  data-source="مجلة/جريدة الحوادث"
+  data-full="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto,w_2000/press8_s9k4bx">
+
+  <img src="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto/press8_s9k4bx"
+       alt="البيوت القديمة تحولت إلى متاحف"
+       loading="lazy"
+       data-i18n-alt="press.n8.title" />
+
+  <div class="pressMeta">
+    <div class="pressYear">—</div>
+    <div class="pressTitle" data-i18n="press.n8.title">البيوت القديمة تحولت إلى متاحف — بغداد ترد الصفعة لهولاكو</div>
+    <div class="pressSource" data-i18n="press.n8.source">مجلة/جريدة الحوادث</div>
+  </div>
+</article>
+
+<!-- 9 (year=0) -->
+<article class="pressCard" data-press-item
+  data-year="0"
+  data-title="كتاب ألماني عن العراق يذكر بيت التحفيات كواجهة سياحية"
+  data-source="كتاب باللغة الألمانية عن العراق"
+  data-full="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto,w_2000/press9_xf1ufd">
+
+  <img src="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto/press9_xf1ufd"
+       alt="كتاب ألماني عن العراق"
+       loading="lazy"
+       data-i18n-alt="press.n9.title" />
+
+  <div class="pressMeta">
+    <div class="pressYear">—</div>
+    <div class="pressTitle" data-i18n="press.n9.title">كتاب ألماني عن العراق يذكر بيت التحفيات كواجهة سياحية</div>
+    <div class="pressSource" data-i18n="press.n9.source">كتاب باللغة الألمانية عن العراق</div>
+  </div>
+</article>
+    </section>
+
+    <!-- BROCHURES -->
+    <section class="brochures" aria-label="أرشيف البروشورات المطبوعة" data-i18n-aria="press.brochuresAria">
+      <div class="wrap">
+        <div class="brochures__head">
+          <span class="brochures__eyebrow" data-i18n="press.printedArchive">أرشيف مطبوع</span>
+          <h2 class="brochures__title">
+            <span data-i18n="press.brochuresTitle">بروشورات بيت التحفيات</span>
+            <span class="brochures__span" data-i18n="press.brochuresSpan">الثمانينات — التسعينات — 2001</span>
+          </h2>
+          <p class="brochures__desc" data-i18n="press.brochuresDesc">
+            يضم أرشيف بيت التحفيات ثلاث بروشورات مطبوعة فقط، تم إصدارها في فترات زمنية مختلفة.
+          </p>
+        </div>
+      </div>
+
+      <div class="bleed">
+        <div class="brochures__grid">
+
+          <article class="brochureItem">
+            <div class="brochureFrame">
+              <img src="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto/press02_qfbjfa" alt="" loading="lazy" data-i18n-alt="press.b1.alt" />
+            </div>
+            <div class="brochureText">
+              <span class="brochureYear" data-i18n="press.b1.year">الثمانينات</span>
+              <h3 data-i18n="press.b1.title">بروشور بيت التحفيات — الإصدار الأول</h3>
+              <p data-i18n="press.b1.desc">وثيقة تعريفية مبكرة تسبق مرحلة الانتشار الواسع.</p>
+            </div>
+          </article>
+
+          <article class="brochureItem">
+            <div class="brochureFrame">
+              <img src="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto/press03_teh62f" alt="" loading="lazy" data-i18n-alt="press.b2.alt" />
+            </div>
+            <div class="brochureText">
+              <span class="brochureYear" data-i18n="press.b2.year">التسعينات</span>
+              <h3 data-i18n="press.b2.title">بروشور بيت التحفيات</h3>
+              <p data-i18n="press.b2.desc">أحد البروشورات الأصلية التي طُبعت للتعريف ببيت التحفيات.</p>
+            </div>
+          </article>
+
+          <article class="brochureItem">
+            <div class="brochureFrame">
+              <img src="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto/press01_ru6ghj" alt="" loading="lazy" data-i18n-alt="press.b3.alt" />
+            </div>
+            <div class="brochureText">
+              <span class="brochureYear" data-i18n="press.b3.year">2001</span>
+              <h3 data-i18n="press.b3.title">بروشور بيت التحفيات — إصدار 2001</h3>
+              <p data-i18n="press.b3.desc">إصدار يوثّق مرحلة أكثر نضجًا في تقديم بيت التحفيات.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <button class="lightbox__close" id="lbClose" type="button" aria-label="Close">×</button>
+      <figure class="lightbox__stage" role="dialog" aria-modal="true" aria-label="عرض الصورة" data-i18n-aria="press.lbAria">
+        <img id="lbImg" alt="" data-i18n-alt="press.lbImgAlt" />
+        <figcaption class="lightbox__meta" id="lbMeta"></figcaption>
+      </figure>
+    </div>
+
+    <!-- FOOTER COVER -->
+    <section class="footerCover" aria-hidden="true">
+      <img src="https://res.cloudinary.com/dyqdfbaln/image/upload/f_auto,q_auto/footercover_l3vfuu" alt="" loading="lazy" />
+    </section>
+
+    <!-- FOOTER (same as home) -->
+    <footer class="siteFooter" id="footer" role="contentinfo">
+      <div class="fWrap">
+
+        <div class="fTop">
+          <div class="fCta">
+            <div class="fCta__text">
+              <div class="fCta__title" data-i18n="footer.cta.title">هل أنت مستعد لاكتشاف بيت التحفيات؟</div>
+              <div class="fCta__sub" data-i18n="footer.cta.sub">احجز زيارتك أو شاهد الجولة الافتراضية</div>
+            </div>
+
+            <div class="fCta__actions">
+              <a class="btn btn--primary" href="https://houseofantiques.github.io/Booking-/" data-i18n="footer.cta.book">احجز الآن</a>
+              <a class="btn btn--ghost" href="tour.html" data-i18n="footer.cta.tour">الجولة الافتراضية</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="fGrid">
+
+          <div class="fCol fCol--about">
+            <p class="fNote" data-i18n="footer.note">
+              منصة تعريفية ثقافية توثق قصة البيت والعائلة والتحف، وتعرض خدمات الزيارات والفعاليات.
+            </p>
+
+            <div class="fAddrLine">
+              <a class="addrPill" href="https://maps.app.goo.gl/PCJQtERUQCZnT6tv6" target="_blank" rel="noopener">
+                <span class="addrIco" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-4.4 7-11a7 7 0 1 0-14 0c0 6.6 7 11 7 11zm0-9.2a2.8 2.8 0 1 1 0-5.6 2.8 2.8 0 0 1 0 5.6z"/></svg>
+                </span>
+                <span data-i18n="footer.addr">بغداد — شارع أبو نؤاس</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="fCol">
+            <div class="fTitle" data-i18n="footer.quick">روابط سريعة</div>
+            <ul class="fLinks fLinks--2col">
+              <li><a href="about.html" data-i18n="footer.about">نبذة</a></li>
+              <li><a href="press.html" data-i18n="footer.press">الصحافة</a></li>
+              <li><a href="store.html" data-i18n="footer.store">المتجر</a></li>
+              <li><a href="auction.html" data-i18n="footer.auction">المزاد</a></li>
+            </ul>
+          </div>
+
+          <div class="fCol">
+            <div class="fTitle" data-i18n="footer.legal">القانون والسياسات</div>
+            <ul class="fLinks">
+              <li><a href="terms.html" data-i18n="footer.terms">الأحكام</a></li>
+              <li><a href="privacy.html" data-i18n="footer.privacy">الخصوصية</a></li>
+            </ul>
+          </div>
+
+          <div class="fCol">
+            <div class="fTitle" data-i18n="footer.contact">تواصل</div>
+
+            <div class="fIcons" aria-label="روابط التواصل">
+              <!-- icons unchanged -->
+              <a class="ico" href="mailto:houseofantiques@gmail.com" aria-label="Email">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              </a>
+              <a class="ico" href="https://wa.me/9647777045599" target="_blank" rel="noopener" aria-label="WhatsApp">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.9A8.5 8.5 0 1 1 11.9 3a8.5 8.5 0 0 1 8.6 8.9zm-4.1 2.4c-.2-.1-1.2-.6-1.4-.7-.2-.1-.4-.1-.5.1-.1.2-.6.7-.7.8-.1.1-.3.1-.5 0-.3-.1-1-.4-1.9-1.3-.7-.6-1.1-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.1.1-.3.1-.4 0-.1-.5-1.3-.7-1.8-.2-.5-.4-.4-.5-.4h-.4c-.1 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.1.9 2.3c.1.2 1.6 2.4 3.9 3.4.5.2.9.3 1.2.4.5.2 1 .2 1.4.1.4-.1 1.2-.5 1.3-.9.2-.4.2-.8.1-.9-.1-.1-.2-.2-.4-.3z"/></svg>
+              </a>
+              <a class="ico" href="tel:+9647777045599" aria-label="Call">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.4.6 3.7.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.3 21 3 13.7 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.7.1.4 0 .8-.3 1.1l-2.2 2.2z"/></svg>
+              </a>
+              <a class="ico" href="https://web.facebook.com/profile.php?id=61576091652992" target="_blank" rel="noopener" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2.3V12h2.3V9.8c0-2.3 1.4-3.6 3.5-3.6 1 0 2 .2 2 .2v2.2h-1.1c-1.1 0-1.4.7-1.4 1.4V12h2.5l-.4 2.9h-2.1v7A10 10 0 0 0 22 12z"/></svg>
+              </a>
+              <a class="ico" href="https://www.instagram.com/house_ofantiques/?__pwa=1" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5a4.5 4.5 0 1 1-4.5 4.5A4.5 4.5 0 0 1 12 7.5zm0 2a2.5 2.5 0 1 0 2.5 2.5A2.5 2.5 0 0 0 12 9.5zm4.8-2.8a1.1 1.1 0 1 1-1.1-1.1 1.1 1.1 0 0 1 1.1 1.1z"/></svg>
+              </a>
+              <a class="ico" href="https://www.youtube.com/@house.of.antiques" target="_blank" rel="noopener" aria-label="YouTube">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.2-1.7-.9-2.4c-.9-.9-1.9-.9-2.4-1C16.9 2.5 12 2.5 12 2.5h0s-4.9 0-8.2.3c-.4.1-1.5.1-2.4 1-.7.7-.9 2.4-.9 2.4S0 8.1 0 10v1.9c0 1.9.2 3.8.2 3.8s.2 1.7.9 2.4c.9.9 2.1.9 2.6 1 1.9.2 8.3.3 8.3.3s4.9 0 8.2-.3c.4-.1 1.5-.1 2.4-1 .7-.7.9-2.4.9-2.4s.2-1.9.2-3.8V10c0-1.9-.2-3.8-.2-3.8zM9.5 14.8V7.8l6.2 3.5-6.2 3.5z"/></svg>
+              </a>
+              <a class="ico" href="https://maps.app.goo.gl/PCJQtERUQCZnT6tv6" target="_blank" rel="noopener" aria-label="Location">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-4.4 7-11a7 7 0 1 0-14 0c0 6.6 7 11 7 11zm0-9.2a2.8 2.8 0 1 1 0-5.6 2.8 2.8 0 0 1 0 5.6z"/></svg>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="fBottom">
+          <div class="fCopy" data-i18n="footer.copy">© 2026 بيت التحفيات — جميع الحقوق محفوظة</div>
+        </div>
+
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- scripts (same order) -->
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+  <script src="press.js"></script>
+</body>
+</html>

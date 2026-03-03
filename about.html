@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>نبذة | بيت التحفيات</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="about.css" />
+
+  <style>
+@media (max-width: 860px){
+
+  /* خلي الكارد مثل مودال ثابت */
+  .overlayCard.is-open{
+    position: fixed !important;
+    inset: 10px !important;
+    margin: 0 !important;
+    transform: none !important;
+    height: auto !important;
+    max-height: none !important;
+    z-index: 5000 !important;
+    overflow: hidden !important;
+    border-radius: 18px !important;
+  }
+
+  /* خلي المحتوى Flex حتى ما ينهار */
+  .overlayCard.is-open{
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .overlayCard.is-open .overlayCard__media{
+    flex: 0 0 auto !important;
+  }
+
+  .overlayCard.is-open .overlayCard__text{
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+  }
+
+  /* هذا المهم: النص ياخذ المساحة ويصير سكرول */
+  .overlayCard.is-open .overlayCard__body{
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overflow: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+
+    display: block !important;
+    -webkit-line-clamp: unset !important;
+    -webkit-box-orient: unset !important;
+    white-space: pre-line !important;
+    padding-inline-end: 12px !important;
+  }
+
+  /* غلق: خلي مختصر */
+  .overlayCard:not(.is-open) .overlayCard__body{
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 6 !important;
+    overflow: hidden !important;
+  }
+}
+/* =========================
+   STOP MODAL: keep card inline + body scroll only
+========================= */
+@media (max-width: 860px){
+
+  /* إلغاء أي مودال/Fixed */
+  .overlayCard.is-open{
+    position: static !important;
+    inset: auto !important;
+    transform: none !important;
+    z-index: auto !important;
+    height: auto !important;
+    max-height: none !important;
+    margin: 14px auto !important;
+  }
+
+  /* لا تخلي الكارد يسكّرول، خلي السكروول داخل النص فقط */
+  .overlayCard{
+    overflow: hidden !important;
+  }
+
+  .overlayCard__text{
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+  }
+
+  /* مغلق: مختصر */
+  .overlayCard__body{
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 6 !important;
+    overflow: hidden !important;
+    white-space: pre-line !important;
+  }
+
+  /* مفتوح: سكروول داخل النص فقط */
+  .overlayCard.is-open .overlayCard__body{
+    display: block !important;
+    -webkit-line-clamp: unset !important;
+    overflow: auto !important;
+    max-height: 52vh !important;  /* عدّلها إذا تريد أطول */
+    -webkit-overflow-scrolling: touch;
+    padding-inline-end: 10px !important;
+  }
+}
+</style>
+  <script defer src="about.js"></script>
+</head>
+
+<body>
+
+  <!-- ================= TOPBAR (Unified) ================= -->
+  <header class="hoaTopbar" role="banner">
+    <div class="hoaTopbar__inner">
+
+      <!-- Mobile: left controls -->
+      <div class="hoaTopbar__left">
+        <!-- Hamburger (mobile only) -->
+        <button class="iconBtn iconBtn--menu" type="button" id="menuBtn" aria-label="القائمة" aria-expanded="false" aria-controls="mobileMenu">
+          <span class="hamburger" aria-hidden="true"></span>
+        </button>
+
+        <!-- One language toggle -->
+        <button class="langToggle" type="button" id="langToggle" aria-label="تبديل اللغة">
+          <span class="langToggle__txt" id="langToggleTxt">AR</span>
+        </button>
+
+        <!-- Mobile CTAs (2 فقط) -->
+        <a class="ctaPill ctaPill--ghost" href="tour.html"
+           data-ar="جولة"
+           data-en="Tour">جولة</a>
+
+        <a class="ctaPill ctaPill--solid" href="https://houseofantiques.github.io/Booking-/"
+           data-ar="احجز"
+           data-en="Book">احجز</a>
+      </div>
+
+      <!-- Desktop nav (7 links بالوسط) -->
+      <nav class="hoaNav" aria-label="التنقل الرئيسي">
+        <a class="hoaNav__link" href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+        <a class="hoaNav__link is-active" href="about.html" aria-current="page" data-ar="نبذة" data-en="About">نبذة</a>
+        <a class="hoaNav__link" href="tour.html" data-ar="جولة افتراضية" data-en="Virtual Tour">جولة افتراضية</a>
+        <a class="hoaNav__link" href="press.html" data-ar="الصحافة" data-en="Press">الصحافة</a>
+        <a class="hoaNav__link" href="store.html" data-ar="المتجر" data-en="Store">المتجر</a>
+        <a class="hoaNav__link" href="auction.html" data-ar="المزاد" data-en="Auction">المزاد</a>
+        <a class="hoaNav__link" href="#footer" data-ar="تواصل" data-en="Contact">تواصل</a>
+      </nav>
+
+      <!-- Brand (RIGHT) -->
+      <a class="hoaBrand" href="index.html" aria-label="العودة إلى الصفحة الرئيسية">
+        <span class="hoaBrand__logo" aria-hidden="true">
+        <img src="logo.png" alt="" loading="lazy">
+          >
+        </span>
+        <span class="hoaBrand__text">
+          <strong class="hoaBrand__title" data-ar="بيت التحفيات" data-en="House of Antiques">بيت التحفيات</strong>
+          <em class="hoaBrand__sub">House of Antiques</em>
+        </span>
+      </a>
+
+      <!-- Desktop: right controls (only lang small) -->
+      <div class="hoaTopbar__right">
+        <button class="langToggle langToggle--desk" type="button" id="langToggleDesk" aria-label="تبديل اللغة">
+          <span class="langToggle__txt" id="langToggleDeskTxt">AR</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= MOBILE MENU (Slide like reference) ================= -->
+  <aside class="mobileMenu" id="mobileMenu" aria-hidden="true">
+    <div class="mobileMenu__panel" role="dialog" aria-modal="true" aria-label="القائمة">
+      <button class="mobileMenu__close" type="button" id="menuClose" aria-label="إغلاق">×</button>
+
+      <nav class="mobileMenu__nav" aria-label="روابط القائمة">
+        <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+        <a href="about.html" class="is-active" data-ar="نبذة" data-en="About">نبذة</a>
+        <a href="tour.html" data-ar="جولة افتراضية" data-en="Virtual Tour">جولة افتراضية</a>
+        <a href="press.html" data-ar="الصحافة" data-en="Press">الصحافة</a>
+        <a href="store.html" data-ar="المتجر" data-en="Store">المتجر</a>
+        <a href="auction.html" data-ar="المزاد" data-en="Auction">المزاد</a>
+        <a href="#footer" data-ar="تواصل" data-en="Contact">تواصل</a>
+      </nav>
+    </div>
+    <div class="mobileMenu__backdrop" data-close="1" aria-hidden="true"></div>
+  </aside>
+
+  <main>
+
+    <!-- ================= HERO COVER (Edge-to-edge) ================= -->
+    <section class="aboutHero" aria-label="About cover">
+      <img class="aboutHero__img"
+           src="https://res.cloudinary.com/dyqdfbaln/image/upload/assetscard-aboutus_prdlks
+"
+           alt="بيت التحفيات — ذاكرة بغداد"
+           loading="lazy">
+
+      <div class="aboutHero__overlay">
+        <h1 class="aboutHero__title"
+            data-ar="بيت التحفيات — ذاكرة بغداد"
+            data-en="House of Antiques — Baghdad’s Memory">بيت التحفيات — ذاكرة بغداد</h1>
+
+        <a
+          href="https://maps.app.goo.gl/dWs6bkrZMKsSVMd89"
+          target="_blank"
+          rel="noopener"
+          class="mapBtn"
+          aria-label="عرض موقع بيت التحفيات على خرائط كوكل"
+          data-ar="موقع البيت على الخريطة"
+          data-en="Location on Map"
+        >
+          <span class="mapBtn__icon" aria-hidden="true">📍</span>
+          <span class="mapBtn__text">موقع البيت على الخريطة</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 1 ================= -->
+    <section class="section section--light">
+      <div class="wrap">
+        <div class="grid grid--light">
+
+          <div class="lead">
+            <p class="kicker" data-ar="نبذة" data-en="About">نبذة</p>
+            <h2 class="title" data-ar="حكاية بيت… وحكاية عائلة" data-en="A House Story… A Family Story">حكاية بيت… وحكاية عائلة</h2>
+
+            <div class="metaRow">
+              <div class="meta">
+                <span class="meta__label" data-ar="المكان" data-en="Location">المكان</span>
+                <span class="meta__value" data-ar="بغداد — أبو نؤاس" data-en="Baghdad — Abu Nuwas">بغداد — أبو نؤاس</span>
+              </div>
+              <div class="meta">
+                <span class="meta__label" data-ar="التأسيس" data-en="Founded">التأسيس</span>
+                <span class="meta__value" data-ar="1989" data-en="1989">1989</span>
+              </div>
+              <div class="meta">
+                <span class="meta__label" data-ar="الطراز" data-en="Style">الطراز</span>
+                <span class="meta__value" data-ar="بيت بغدادي (1920)" data-en="Baghdadi House (1920)">بيت بغدادي (1920)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="contentBlock">
+            <p class="body" data-ar="بيت التحفيات ليس مجرد مكان لعرض القطع، بل ذاكرة حيّة لبغداد…" data-en="House of Antiques is not just a display space—it's a living memory of Baghdad…">
+              بيت التحفيات ليس مجرد مكان لعرض القطع، بل ذاكرة حيّة لبغداد…
+            </p>
+
+            <div class="infoTable" role="table" aria-label="Info">
+              <div class="infoRow" role="row">
+                <div class="infoKey" role="cell" data-ar="المحتوى" data-en="Content">المحتوى</div>
+                <div class="infoVal" role="cell" data-ar="تحف، سجاد، نحاس، فضة، كريستال، أعمال فنية" data-en="Antiques, carpets, copper, silver, crystal, artworks">
+                  تحف، سجاد، نحاس، فضة، كريستال، أعمال فنية
+                </div>
+              </div>
+              <div class="infoRow" role="row">
+                <div class="infoKey" role="cell" data-ar="الهوية" data-en="Identity">الهوية</div>
+                <div class="infoVal" role="cell" data-ar="متحف + متجر + قصة عائلة" data-en="Museum + Store + Family Story">
+                  متحف + متجر + قصة عائلة
+                </div>
+              </div>
+              <div class="infoRow" role="row">
+                <div class="infoKey" role="cell" data-ar="الرؤية" data-en="Vision">الرؤية</div>
+                <div class="infoVal" role="cell" data-ar="إحياء التراث وإعادة تقديمه بمعايير معاصرة" data-en="Revive heritage and present it with contemporary standards">
+                  إحياء التراث وإعادة تقديمه بمعايير معاصرة
+                </div>
+              </div>
+            </div>
+
+            <div class="chips">
+              <span class="chip" data-ar="قصة عائلة" data-en="Family Story">قصة عائلة</span>
+              <span class="chip" data-ar="متحف حي" data-en="Living Museum">متحف حي</span>
+              <span class="chip" data-ar="تراث بغداد" data-en="Baghdad Heritage">تراث بغداد</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STORY STAGES ================= -->
+    <section class="section section--story">
+      <div class="wrap">
+
+        <!-- STAGE 0 -->
+        <div class="storyStage" style="--bg:url('https://res.cloudinary.com/dyqdfbaln/image/upload/hoa-house');">
+          <article class="overlayCard" aria-label="House card">
+            <div class="overlayCard__media">
+              <img src="https://res.cloudinary.com/dyqdfbaln/image/upload/assetscard1-press_ftn0tl
+" alt="بيت التحفيات" loading="lazy">
+            </div>
+
+            <div class="overlayCard__text">
+              <p class="overlayCard__kicker" data-ar="البيت" data-en="The House">البيت</p>
+              <h2 class="overlayCard__title" data-ar="بيت التحفيات" data-en="House of Antiques">بيت التحفيات</h2>
+              <p class="overlayCard__sub" data-ar="بيت بغدادي — 1920" data-en="Baghdadi House — 1920">بيت بغدادي — 1920</p>
+
+              <div class="overlayCard__body">
+                  <span class="lang-ar">
+بيت التحفيات هو دار بغدادية تراثية يعود تاريخ بنائها إلى عام 1920، شُيّدت وفق أسلوب العمارة البغدادية التقليدية الذي كان سائدًا في أوائل القرن العشرين، والمعتمد على الفناء الداخلي (الحوش)، والغرف المحيطة به، واستخدام المواد المحلية مثل الطابوق الفرشي، والخشب الطبيعي، والزخارف اليدوية البسيطة التي تجمع بين الوظيفة والجمال.
+
+في عام 1989، قام طارق الألماني بشراء هذا البيت التراثي، ليحوّله من مسكن قديم إلى مشروع ثقافي متكامل، حيث أُعيد تأهيله بعناية ليصبح متحفًا ومحلًا متخصصًا بالتحف (أنتيك)، محافظًا في الوقت نفسه على هوية المبنى الأصلية دون تشويه أو تغيير جوهري في معالمه المعمارية.
+
+يمتد بيت التحفيات على مساحة واسعة تضم 14 غرفة موزعة حول حوش بغدادي داخلي وحديقة، وهو توزيع يعكس النمط السكني التقليدي لبيوت بغداد القديمة، حيث كانت الخصوصية، والتهوية الطبيعية، والإنارة، عناصر أساسية في التصميم. وتتميّز الغرف بارتفاع أسقفها، وتنوّع استخداماتها، مما أتاح تحويلها لاحقًا إلى مساحات عرض مختلفة للقطع الفنية والتحف.
+
+يحتوي البيت على مجموعات متنوعة من التحف تشمل السجاد، النحاسيات، الفضة، الأعمال الخشبية، الكريستال، والقطع الفنية النادرة، جرى عرضها بما يتناسب مع طبيعة المكان، بحيث يكون البيت نفسه جزءًا من تجربة العرض، لا مجرد حاوية للقطع.
+
+بيت التحفيات ليس مبنى حديثًا أُعد للعرض، بل بيت تاريخي أُعيد توظيفه ثقافيًا، ليشكّل نموذجًا حيًا لدمج العمارة التراثية مع وظيفة المتحف والمتجر، محافظًا على ذاكرة المكان، ومقدّمًا نموذجًا أصيلًا لبيوت بغداد في القرن الماضي.
+               </span>
+
+  <span class="lang-en">
+House of Antiques is a Baghdadi heritage home built in 1920, following the traditional early-20th-century Baghdadi architectural style. Its design centers around an inner courtyard (the “hosh”), with rooms arranged around it, and it uses local materials such as traditional Baghdadi brick, natural wood, and simple handcrafted details that combine function and beauty.
+
+In 1989, Tariq Al-Almani purchased this heritage house and transformed it from an old residence into a fully realized cultural project. It was carefully rehabilitated to become a museum and a specialized antiques shop (antique), while preserving the original identity of the building—without distorting or making any fundamental changes to its architectural features.
+
+The House of Antiques spans a wide area and includes 14 rooms distributed around an internal Baghdadi courtyard and a garden. This reflects the traditional residential pattern of old Baghdad homes, where privacy, natural ventilation, and daylight were essential design elements. The rooms feature high ceilings and varied layouts, which later allowed them to be adapted into different display spaces for artworks and antiques.
+
+The house contains diverse collections including carpets, copperware, silver, wooden works, crystal, and rare artistic pieces. They are displayed in a way that suits the nature of the place—so the house itself becomes part of the exhibition experience, not merely a container for objects.
+
+House of Antiques is not a modern building prepared for display; it is a historic home repurposed culturally, forming a living example of blending heritage architecture with the function of a museum and store—preserving the memory of the place and presenting an authentic model of Baghdad homes from the last century.
+ </span>
+</div>
+
+              <button class="readMore" type="button" data-ar="اكمل القصة" data-en="Read more">اكمل القصة</button>
+              
+
+              <div class="cardCtas" aria-label="Card actions">
+                <a class="cardBtn cardBtn--primary" href="./tour.html" data-ar="الجولة الافتراضية" data-en="Virtual Tour">الجولة الافتراضية</a>
+              </div>
+
+              <div class="overlayCard__meta">
+                <div class="mini">
+                  <span class="mini__k" data-ar="الموقع" data-en="Location">الموقع</span>
+                  <span class="mini__v" data-ar="شارع أبو نؤاس" data-en="Abu Nuwas Street">شارع أبو نؤاس</span>
+                </div>
+                <div class="mini">
+                  <span class="mini__k" data-ar="محطة" data-en="Milestone">محطة</span>
+                  <span class="mini__v" data-ar="1989 — افتتاح البيت" data-en="1989 — House opening">1989 — افتتاح البيت</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- STAGE 1 -->
+        <div class="storyStage" style="--bg:url('https://res.cloudinary.com/dyqdfbaln/image/upload/hoa-grand');">
+          <article class="overlayCard" aria-label="Grandfather card">
+            <div class="overlayCard__media">
+              <img src="https://res.cloudinary.com/dyqdfbaln/image/upload/grand_f0najb" alt="محمد علي طاهر الألماني" loading="lazy">
+            </div>
+
+            <div class="overlayCard__text">
+              <p class="overlayCard__kicker" data-ar="المؤسس" data-en="Founder">المؤسس</p>
+              <h2 class="overlayCard__title" data-ar="محمد علي طاهر الجزراوي الملقب بالألماني" data-en="Mohammed Ali Taher Al-Jazrawi (Al-Almani)">
+                محمد علي طاهر الجزراوي الملقب بالألماني
+              </h2>
+              <p class="overlayCard__sub" data-ar="1896 — 1988" data-en="1896 — 1988">1896 — 1988</p>
+
+              <div class="overlayCard__body">
+                  <span class="lang-ar">
+محمد علي طاهر الجزراوي، المعروف بلقب الألماني، يُعد من أبرز تجّار التحف في العراق في القرن العشرين، وقد ارتبط اسمه بعالم التراث والاقتناء المعرفي ارتباطًا وثيقًا، حتى أصبح مرجعًا في هذا المجال.
+
+وُلد عام 1896 في جزيرة ابن عمر (جزيرة بوطان) التابعة حاليًا لتركيا، ونشأ في بيئة علمية، حيث تلقّى تعليمه في كردستان، وختم القرآن الكريم، وتعلّم على أيدي عدد من علماء الدين المعروفين في زمانه. ومنذ شبابه، عُرف بحبّه للعلم والمعرفة، فتنقّل بين القرى والأرياف باحثًا عن التعلم واكتساب الخبرة، قبل أن يشدّ الرحال إلى بغداد، حيث استقر في جامع الإمام أبي حنيفة النعمان، وكان طالبًا مجتهدًا ومثابرًا.
+
+امتلك الجد محمد علي طاهر معرفة واسعة بعدة لغات، إذ أتقن اللغة التركية، والفارسية، والإنكليزية، إلى جانب العربية والكردية بلهجاتها، وهو ما ساعده على الاطلاع على ثقافات متعددة، وفهم أعمق للتاريخ والآثار، ومكّنه من التواصل مع تجّار ومقتنين من خلفيات مختلفة.
+
+بدأ شغفه الحقيقي بعالم التحف من جمع السجاد والتحف القديمة، ثم تطوّر هذا الشغف إلى تجارة حقيقية اتخذها مهنة ومصدر رزق، دون أن يفقد بعدها المعرفي. لم يكن جمعه للتحف بدافع التجارة فقط، بل كان قائمًا على المعرفة، والتوثيق، وحفظ القيمة التاريخية، ولذلك عُدّ من أوائل روّاد هذا المجال في العراق.
+
+امتلك ذاكرة استثنائية، وقدرة دقيقة على تمييز القطع، ومعرفة أعمارها، ومناشئها، وتاريخ تداولها، حتى أنه كان يعرف من اقتنى القطعة ومن باعها وفي أي فترة، وهي قدرة نادرة جعلته محل ثقة واحترام واسعَين. وكان معروفًا بتواضعه، وبشغفه الدائم بالحديث عن التحف، وتفاصيلها، وقصصها، دون كلل أو ملل، حتى في أواخر أيامه.
+
+إلى جانب ذلك، كان ملمًّا بعدد كبير من الصناعات والحرف اليدوية الشعبية، ويدرك قيمتها المادية والتاريخية، ويرى فيها جزءًا أساسيًا من هوية المجتمع وذاكرته. وقد انعكس هذا الوعي في طريقته في الاقتناء، حيث لم يكن ينظر إلى القطعة كغرض، بل كوثيقة حيّة.
+
+وكان من أحلامه أن تتحوّل التحف إلى واجهة ثقافية وسياحية، تحفظ التراث وتعرّف به، وقد عبّر عن ذلك بقوله إنه لو امتلك الإمكانيات، لأسّس دارًا واسعة تكون واجهة سياحية مهمّة تليق بقيمة هذا الإرث.
+
+اليوم، يُعد محمد علي طاهر الجزراوي (الألماني) أحد الأسماء المؤسسة في تاريخ تجارة التحف في العراق، ورمزًا للمعرفة المرتبطة بالتراث، وقد شكّل إرثه الأساس الذي بُني عليه ما أصبح لاحقًا بيت التحفيات، استمرارًا لحلمٍ بدأه بعلم، وكرّسه بشغف، وتركه أمانةً للأجيال من بعده.
+</span>
+              <span class="lang-en">
+<span class="lang-en">
+Mohammed Ali Taher Al-Jazrawi, known as “Al-Almani,” is considered one of the most prominent antiques merchants in Iraq during the twentieth century. His name became deeply tied to heritage and informed collecting, to the point that he became a reference in the field.
+
+He was born in 1896 in Jazirat Ibn Umar (Jazira Botan), now in Turkey, and grew up in a scholarly environment. He studied in Kurdistan, memorized the Qur’an, and learned from respected religious scholars of his time. From an early age, he was known for his love of knowledge and learning. He travelled across villages and rural areas to study and gain experience before moving to Baghdad, where he settled at the mosque of Imam Abu Hanifa Al-Nu’man as a diligent and dedicated student.
+
+Mohammed Ali possessed broad linguistic knowledge. He mastered Turkish, Persian, and English, in addition to Arabic and Kurdish dialects. This helped him access multiple cultures, deepen his understanding of history and antiquities, and communicate with merchants and collectors from diverse backgrounds.
+
+His true passion began with collecting carpets and old antiques, then evolved into a real trade that became his profession and source of livelihood—without losing its intellectual dimension. His collecting was not driven by commerce alone, but by knowledge, documentation, and safeguarding historical value. For that, he was considered among the earliest pioneers of this field in Iraq.
+
+He had an exceptional memory and a precise ability to distinguish pieces, identify their age, origin, and circulation history—often knowing who owned a piece, who sold it, and in which period. This rare capability earned him wide respect and trust. He was also known for his humility and his tireless enthusiasm for discussing antiques, their details, and their stories, even late in life.
+
+In addition, he was familiar with many traditional crafts and understood their material and historical value, seeing them as an essential part of society’s identity and memory. This awareness was reflected in his approach: he did not view an item as an object, but as a living document.
+
+One of his dreams was to turn antiques into a cultural and touristic landmark that preserves heritage and introduces it to others. He expressed this by saying that if he had the means, he would establish a large house to serve as an important touristic destination worthy of this legacy.
+
+Today, Mohammed Ali Taher Al-Jazrawi (Al-Almani) remains one of the founding names in the history of antiques trade in Iraq, and a symbol of knowledge linked to heritage. His legacy became the foundation upon which the House of Antiques was later built—continuing a dream he began with learning, devoted with passion, and left as a trust for generations to come.
+</span>
+</div>
+
+              <button class="readMore" type="button" data-ar="اكمل القصة" data-en="Read more">اكمل القصة</button>
+
+              <div class="cardCtas" aria-label="Card actions">
+                <a class="cardBtn cardBtn--ghost" href="./press.html" data-ar="الصحافة" data-en="Press">الصحافة</a>
+              </div>
+
+              <div class="overlayCard__meta">
+                <div class="mini">
+                  <span class="mini__k" data-ar="محطة" data-en="Milestone">محطة</span>
+                  <span class="mini__v" data-ar="محلات خان البغدادي" data-en="Khan Al-Baghdadi shops">محلات خان البغدادي</span>
+                </div>
+                <div class="mini">
+                  <span class="mini__k" data-ar="الأمنية" data-en="Wish">الأمنية</span>
+                  <span class="mini__v" data-ar="“لو كنت صاحب ثروة…”" data-en="“If I had wealth…”">“لو كنت صاحب ثروة…”</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- STAGE 2 -->
+        <div class="storyStage" style="--bg:url('https://res.cloudinary.com/dyqdfbaln/image/upload/hoa-father');">
+          <article class="overlayCard" aria-label="Father card">
+            <div class="overlayCard__media">
+              <img src="https://res.cloudinary.com/dyqdfbaln/image/upload/father_fafsuw
+" alt="طارق محمد علي الألماني" loading="lazy">
+            </div>
+
+            <div class="overlayCard__text">
+              <p class="overlayCard__kicker" data-ar=" الامتداد العملي لإرث التحف" data-en="The practical extension of the antiques legacy"> الامتداد العملي لإرث التحف</p>
+              <h2 class="overlayCard__title" data-ar="طارق محمد علي الألماني" data-en="Tariq Mohammed Ali Al-Almani">طارق محمد علي الألماني</h2>
+              <p class="overlayCard__sub" data-ar="1954 — 2014" data-en="1954 — 2014">1954 — 2014</p>
+
+              <div class="overlayCard__body">
+                  <span class="lang-ar">
+نشأ طارق الألماني في بيئة ارتبطت بالتحف منذ طفولته المبكرة، حيث كان ملازمًا لوالده، التاجر والباحث في عالم التراث محمد علي طاهر الجزراوي (الألماني). لم تكن التحف بالنسبة له عالمًا طارئًا أو هواية لاحقة، بل جزءًا من الحياة اليومية، تعلّم تفاصيله من الممارسة المباشرة لا من الكتب وحدها.
+
+منذ سنواته الأولى، رافق والده في الأسواق، والمنازل القديمة، ومجالس التجّار، وتعرّف عن قرب على أساليب اقتناء القطع، وطرق تمييزها، وقيمتها التاريخية، وأصول صناعتها. هذا الاحتكاك المبكر كوّن لديه خبرة تراكمية، جعلته يفهم عالم الأنتيك كمنظومة متكاملة تشمل المعرفة، والذوق، والمسؤولية تجاه التراث.
+
+قبل امتلاكه بيت التحفيات، كان لطارق الألماني محلات متخصصة بالأنتيك في منطقة الميدان، إحدى أبرز مناطق بغداد التجارية والتراثية، حيث مارس العمل بشكل مستقل، وبنى سمعة معروفة بين التجّار والمهتمين. وقد عُرف بلقب الألماني استمرارًا للقب والده، ليصبح الاسم علامة مرتبطة بالثقة والمعرفة في مجال التحف.
+
+تعلّم طارق الألماني على يد والده أسس التعامل مع القطع النادرة، وأهمية حفظها، وعدم التفريط بقيمتها التاريخية مقابل الربح السريع. كما تعرّف على تنوّع المدارس الفنية، والحرف اليدوية، والمواد المستخدمة في السجاد، والنحاس، والفضة، والخشب، والكريستال، وغيرها من الأصناف التي شكّلت لاحقًا نواة مجموعاته الخاصة.
+
+مع تقدّمه في العمر، لم يكتفِ بدور المرافق أو التلميذ، بل بدأ بممارسة التقييم والاقتناء بنفسه، مستفيدًا من إرث معرفي متين وتجربة عملية طويلة. وبمرور الوقت، تشكّلت لديه شخصية مستقلة في عالم التحف، تجمع بين احترام الأصل والقدرة على التوسّع المدروس.
+
+في عام 1989، شكّل شراءه للبيت التراثي وتحويله إلى بيت التحفيات نقطة تحوّل مفصلية في مسيرته، حيث انتقل من المحلات التجارية إلى مشروع ثقافي ومعرفي واضح المعالم، يجمع بين المتحف والمتجر، ويضع التحف في سياق معماري يليق بقيمتها التاريخية. وقد حافظ في هذا المشروع على روح البيت البغدادي، وعلى فلسفة والده في الجمع بين المعرفة والحفظ، دون الإخلال بهوية المكان.
+
+استمر بيت التحفيات في عهد طارق الألماني كمركز معروف لاقتناء وعرض التحف حتى عام 2004، حين توقّف العمل به نتيجة الظروف التي مرّ بها العراق آنذاك.
+
+تمثّل تجربة طارق الألماني حلقة الوصل بين الجيل المؤسّس والجيل اللاحق، إذ لم يكن مجرد وريث لمجموعة تحف، بل حاملًا لاسمٍ وتجربةٍ ومعرفةٍ متراكمة، أسهمت في ترسيخ مكانة بيت التحفيات كعنوان معروف في عالم الأنتيك في بغداد.
+</span>
+  <span class="lang-en">
+<span class="lang-en">
+Tariq Al-Almani grew up in an environment connected to antiques from early childhood, alongside his father Mohammed Ali Taher Al-Jazrawi (Al-Almani), a merchant and researcher in heritage. For him, antiques were not a sudden world or a later hobby; they were part of daily life, learned through direct practice rather than books alone.
+
+From his early years, he accompanied his father to markets, old houses, and merchants’ gatherings, learning firsthand how to acquire pieces, distinguish them, understand their historical value, and recognize their craftsmanship. This early exposure built cumulative experience and helped him understand antiques as a complete system of knowledge, taste, and responsibility toward heritage.
+
+Before owning the House of Antiques, Tariq Al-Almani ran specialized antiques shops in Al-Maidan, one of Baghdad’s most notable commercial and heritage areas. There, he worked independently and built a respected reputation among merchants and enthusiasts. He carried the title “Al-Almani” as a continuation of his father’s nickname, turning the name into a mark of trust and expertise in the antiques field.
+
+Under his father’s guidance, he learned the principles of dealing with rare pieces and the importance of preserving them—never sacrificing historical value for quick profit. He also became familiar with diverse artistic schools, handicrafts, and materials used in carpets, copper, silver, wood, crystal, and other categories that later formed the core of his own collections.
+
+As he matured, he did not remain only a companion or student; he began evaluating and collecting on his own, benefiting from a strong knowledge legacy and long practical experience. Over time, he developed an independent identity in the antiques world—combining respect for authenticity with thoughtful expansion.
+
+In 1989, purchasing the heritage house and turning it into the House of Antiques marked a pivotal shift. He moved from commercial shops to a clearly defined cultural project combining museum and store, placing antiques within an architectural setting worthy of their value. He preserved the Baghdadi spirit of the house and his father’s philosophy of uniting knowledge with preservation—without compromising the identity of the place.
+
+The House of Antiques continued under Tariq Al-Almani as a well-known center for collecting and displaying antiques until 2004, when operations stopped due to the circumstances Iraq faced at the time.
+
+Tariq Al-Almani’s experience represents the bridge between the founding generation and the next one. He was not merely an heir to objects, but a carrier of a name, a practice, and accumulated knowledge—helping establish the House of Antiques as a recognized address in Baghdad’s antiques scene.
+</span> </span>
+</div>
+              <button class="readMore" type="button" data-ar="اكمل القصة" data-en="Read more">اكمل القصة</button>
+
+              <div class="cardCtas" aria-label="Card actions">
+                <a class="cardBtn cardBtn--ghost" href="./press.html" data-ar="الصحافة" data-en="Press">الصحافة</a>
+              </div>
+
+              <div class="overlayCard__meta">
+                <div class="mini">
+                  <span class="mini__k" data-ar="محطة" data-en="Milestone">محطة</span>
+                  <span class="mini__v" data-ar="1989 — شراء البيت" data-en="1989 — Bought the house">1989 — شراء البيت</span>
+                </div>
+                <div class="mini">
+                  <span class="mini__k" data-ar="عصر" data-en="Era">عصر</span>
+                  <span class="mini__v" data-ar="1989–2004 — ازدهار البيت" data-en="1989–2004 — Flourishing era">1989–2004 — ازدهار البيت</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- STAGE 3 -->
+        <div class="storyStage" style="--bg:url('https://res.cloudinary.com/dyqdfbaln/image/upload/hoa-azad');">
+          <article class="overlayCard" aria-label="Azad card">
+            <div class="overlayCard__media">
+              <img src="https://res.cloudinary.com/dyqdfbaln/image/upload/azad_v4quiw
+" alt="أزاد طارق محمد علي الألماني" loading="lazy">
+            </div>
+
+            <div class="overlayCard__text">
+              <p class="overlayCard__kicker" data-ar="الجيل الثالث" data-en="Third Generation">الجيل الثالث</p>
+              <h2 class="overlayCard__title" data-ar="أزاد طارق محمد علي الألماني" data-en="Azad Tariq Mohammed Ali Al-Almani">أزاد طارق محمد علي الألماني</h2>
+              <p class="overlayCard__sub" data-ar="إحياء البيت — 2022" data-en="Revival — 2022">إحياء البيت — 2022</p>
+
+               <div class="overlayCard__body">
+                  <span class="lang-ar">
+يُمثّل أزاد طارق الألماني الجيل الثالث في مسيرة عائلة الألماني في عالم التحف، وهو الامتداد الذي أعاد وصل الماضي بالحاضر بعد مرحلة انقطاع طويلة فرضتها الظروف.
+
+وُلد أزاد عام 1989، وهو نفس العام الذي تحوّل فيه البيت التراثي إلى بيت التحفيات، ما جعل طفولته وذكرياته الأولى مرتبطة بالمكان بشكل مباشر. قضى سنواته الأولى داخل البيت، مرافقًا لوالده طارق الألماني، ومتعرّفًا منذ الصغر على القطع، والغرف، والحوش البغدادي، وطريقة عرض التحف، وهو ما شكّل وعيه المبكر بقيمة المكان قبل أن يدرك أبعاده الثقافية.
+
+في عام 2004، أُغلق بيت التحفيات نتيجة الحرب والظروف الأمنية التي مرّ بها العراق، وتوقّف المشروع رغم مكانته المعروفة آنذاك. وبعد سنوات، وتحديدًا مع وفاة والده في عام 2014، أصبحت مسؤولية الإرث معلّقة بين الذاكرة والواقع، في وقت كان أزاد يعيش خارج العراق.
+
+تنقّل أزاد بين الولايات المتحدة ومصر، حيث عمل كـمنتج في مصر، ورجل أعمال في كل من أمريكا ومصر، مكتسبًا خبرة عملية في الإدارة، والإنتاج، وبناء المشاريع، بعيدًا عن عالم التحف بشكل مباشر، لكن دون أن ينقطع عن جذوره الثقافية.
+
+لاحقًا، عاد أزاد إلى بغداد بدافع إعادة إحياء بيت التحفيات، لا كمشروع جديد، بل كمكان له تاريخ وهوية. عمل على ترميم البيت مع الحفاظ الكامل على شكله المعماري الأصلي، واحترام تفاصيله البغدادية، وفي الوقت نفسه أضاف لمسة معاصرة مدروسة في أسلوب العرض والتنظيم، بما ينسجم مع متطلبات الحاضر دون المساس بروح المكان.
+
+لم تقتصر جهوده على الترميم فقط، بل استمر في اقتناء وشراء القطع النادرة، وتوسيع المجموعة بما يحافظ على مستوى البيت وقيمته التاريخية، مستندًا إلى الإرث المعرفي الذي نشأ عليه، وإلى خبرته العملية في إدارة المشاريع.
+
+يمثّل أزاد طارق الألماني مرحلة التحوّل من الحفظ إلى الإحياء، حيث لم يكن هدفه إعادة فتح المكان فحسب، بل إعادة تعريف بيت التحفيات كمساحة ثقافية حيّة، تستند إلى تاريخ يمتد لثلاثة أجيال، وتخاطب الحاضر بلغة معاصرة، دون أن تنفصل عن جذورها.
+</span>
+ <span class="lang-en">
+<span class="lang-en">
+<span class="lang-en">
+Azad Tariq Al-Almani represents the third generation of the Al-Almani family’s journey in antiques. He is the continuation that reconnected the past with the present after a long interruption imposed by circumstances.
+
+Azad was born in 1989—the same year the heritage house became the House of Antiques—so his earliest memories were directly tied to the place. He spent his early years inside the house, accompanying his father Tariq Al-Almani, and grew up familiar with the pieces, rooms, courtyard, and display style. This shaped his early awareness of the place’s value before he fully grasped its cultural significance.
+
+In 2004, the House of Antiques was closed due to war and the security conditions in Iraq, and the project halted despite its reputation. Later, with his father’s passing in 2014, responsibility for the legacy remained suspended between memory and reality—at a time when Azad was living outside Iraq.
+
+Azad moved between the United States and Egypt, working as a producer in Egypt and as a businessman in both the U.S. and Egypt. He gained practical experience in management, production, and building projects, away from antiques directly—yet without disconnecting from his cultural roots.
+
+He later returned to Baghdad driven by the desire to revive the House of Antiques—not as a new project, but as a place with history and identity. He worked on restoring the house while fully preserving its original architectural form and Baghdadi details, while adding a carefully considered contemporary touch to display and organization—matching today’s needs without losing the spirit of the place.
+
+His effort did not stop at restoration. He continued acquiring rare pieces and expanding the collection in a way that maintains the house’s standard and historical value, drawing on the knowledge legacy he grew up with and his business experience in project leadership.
+
+Azad represents a shift from preservation to revival. His goal was not only reopening the doors, but redefining the House of Antiques as a living cultural space—rooted in a three-generation history and speaking to the present with a contemporary language without severing its origins.
+</span></span> </span>
+</div>
+              <button class="readMore" type="button" data-ar="اكمل القصة" data-en="Read more">اكمل القصة</button>
+
+              <div class="cardCtas" aria-label="Card actions">
+                <a class="cardBtn cardBtn--ghost" href="./press.html" data-ar="الصحافة" data-en="Press">الصحافة</a>
+              </div>
+
+              <div class="overlayCard__meta">
+                <div class="mini">
+                  <span class="mini__k" data-ar="" data-en=""></span>
+                  <span class="mini__v" data-ar="" data-en=""></span>
+                </div>
+                <div class="mini">
+                  <span class="mini__k" data-ar="" data-en=""></span>
+                  <span class="mini__v" data-ar="2022 — ترميم وإعادة فتح" data-en="2022 — Restoration & Reopening">2022 — ترميم وإعادة فتح</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER COVER ================= -->
+  <section class="footerCover" aria-hidden="true">
+    <img src="https://res.cloudinary.com/dyqdfbaln/image/upload/footercover_l3vfuu" alt="" loading="lazy">
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="siteFooter" id="footer" role="contentinfo">
+    <div class="fWrap">
+
+      <!-- CTA -->
+      <div class="fTop">
+        <div class="fCta">
+          <div class="fCta__text">
+            <div class="fCta__title" data-ar="جاهز تستكشف بيت التحفيات؟" data-en="Ready to explore House of Antiques?">جاهز تستكشف بيت التحفيات؟</div>
+            <div class="fCta__sub" data-ar="احجز زيارتك أو شاهد الجولة الافتراضية" data-en="Book your visit or view the virtual tour">احجز زيارتك أو شاهد الجولة الافتراضية</div>
+          </div>
+
+          <div class="fCta__actions">
+            <a class="btn btn--primary" href="https://houseofantiques.github.io/Booking-/" data-ar="احجز الآن" data-en="Book now">احجز الآن</a>
+            <a class="btn btn--ghost" href="tour.html" data-ar="الجولة الافتراضية" data-en="Virtual Tour">الجولة الافتراضية</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRID -->
+      <div class="fGrid">
+
+        <!-- About -->
+        <div class="fCol fCol--about">
+          <p class="fNote" data-ar="منصة تعريفية ثقافية توثق قصة البيت والعائلة والتحف، وتعرض خدمات الزيارات والفعاليات."
+             data-en="A cultural platform documenting the house, the family, and the antiques—showcasing visits and events.">
+            منصة تعريفية ثقافية توثق قصة البيت والعائلة والتحف، وتعرض خدمات الزيارات والفعاليات.
+          </p>
+
+          <a class="addrPill" href="https://maps.app.goo.gl/PCJQtERUQCZnT6tv6" target="_blank" rel="noopener" aria-label="موقع بيت التحفيات على الخريطة">
+            <span class="addrIco" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2c3.9 0 7 3.1 7 7 0 5.2-7 13-7 13S5 14.2 5 9c0-3.9 3.1-7 7-7zm0 9.4c1.3 0 2.4-1.1 2.4-2.4S13.3 6.6 12 6.6 9.6 7.7 9.6 9s1.1 2.4 2.4 2.4z"/>
+              </svg>
+            </span>
+            <span class="addrTxt" data-ar="بغداد — شارع أبو نؤاس" data-en="Baghdad — Abu Nuwas Street">بغداد — شارع أبو نؤاس</span>
+          </a>
+        </div>
+
+        <!-- Quick links -->
+        <div class="fCol">
+          <div class="fTitle" data-ar="روابط سريعة" data-en="Quick links">روابط سريعة</div>
+          <ul class="fLinks fLinks--2col">
+            <li><a href="about.html" data-ar="نبذة" data-en="About">نبذة</a></li>
+            <li><a href="press.html" data-ar="الصحافة" data-en="Press">الصحافة</a></li>
+            <li><a href="store.html" data-ar="المتجر" data-en="Store">المتجر</a></li>
+            <li><a href="auction.html" data-ar="المزاد" data-en="Auction">المزاد</a></li>
+
+            <!-- NEW -->
+            <li><a href="inspection.html" data-ar="فحص و شراء قطع الانتيك" data-en="Inspection & Buying Antiques">فحص و شراء قطع الانتيك</a></li>
+          </ul>
+        </div>
+
+        <!-- Policies -->
+        <div class="fCol">
+          <div class="fTitle" data-ar="القانون والسياسات" data-en="Legal">القانون والسياسات</div>
+          <ul class="fLinks">
+            <li><a href="terms.html" data-ar="الأحكام" data-en="Terms">الأحكام</a></li>
+            <li><a href="privacy.html" data-ar="الخصوصية" data-en="Privacy">الخصوصية</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact icons -->
+        <div class="fCol">
+          <div class="fTitle" data-ar="تواصل" data-en="Contact">تواصل</div>
+
+          <div class="fIcons" aria-label="روابط التواصل">
+            <a class="ico" href="mailto:houseofantiques@gmail.com" aria-label="Email">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
+
+            <a class="ico" href="https://wa.me/9647777045599" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24"><path d="M20.5 11.9A8.5 8.5 0 1 1 11.9 3a8.5 8.5 0 0 1 8.6 8.9zm-4.1 2.4c-.2-.1-1.2-.6-1.4-.7-.2-.1-.4-.1-.5.1-.1.2-.6.7-.7.8-.1.1-.3.1-.5 0-.3-.1-1-.4-1.9-1.3-.7-.6-1.1-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.1.1-.3.1-.4 0-.1-.5-1.3-.7-1.8-.2-.5-.4-.4-.5-.4h-.4c-.1 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.1.9 2.3c.1.2 1.6 2.4 3.9 3.4.5.2.9.3 1.2.4.5.2 1 .2 1.4.1.4-.1 1.2-.5 1.3-.9.2-.4.2-.8.1-.9-.1-.1-.2-.2-.4-.3z"/></svg>
+            </a>
+
+            <a class="ico" href="tel:+9647777045599" aria-label="Call">
+              <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.4.6 3.7.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.3 21 3 13.7 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.7.1.4 0 .8-.3 1.1l-2.2 2.2z"/></svg>
+            </a>
+
+            <a class="ico" href="https://web.facebook.com/profile.php?id=61576091652992" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2.3V12h2.3V9.8c0-2.3 1.4-3.6 3.5-3.6 1 0 2 .2 2 .2v2.2h-1.1c-1.1 0-1.4.7-1.4 1.4V12h2.5l-.4 2.9h-2.1v7A10 10 0 0 0 22 12z"/></svg>
+            </a>
+
+            <a class="ico" href="https://www.instagram.com/house_ofantiques/?__pwa=1" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5a4.5 4.5 0 1 1-4.5 4.5A4.5 4.5 0 0 1 12 7.5zm0 2a2.5 2.5 0 1 0 2.5 2.5A2.5 2.5 0 0 0 12 9.5zm4.8-2.8a1.1 1.1 0 1 1-1.1-1.1 1.1 1.1 0 0 1 1.1 1.1z"/></svg>
+            </a>
+
+            <a class="ico" href="https://www.youtube.com/@house.of.antiques" target="_blank" rel="noopener" aria-label="YouTube">
+              <svg viewBox="0 0 24 24"><path d="M23.5 6.2s-.2-1.7-.9-2.4c-.9-.9-1.9-.9-2.4-1C16.9 2.5 12 2.5 12 2.5h0s-4.9 0-8.2.3c-.4.1-1.5.1-2.4 1-.7.7-.9 2.4-.9 2.4S0 8.1 0 10v1.9c0 1.9.2 3.8.2 3.8s.2 1.7.9 2.4c.9.9 2.1.9 2.6 1 1.9.2 8.3.3 8.3.3s4.9 0 8.2-.3c.4-.1 1.5-.1 2.4-1 .7-.7.9-2.4.9-2.4s.2-1.9.2-3.8V10c0-1.9-.2-3.8-.2-3.8zM9.5 14.8V7.8l6.2 3.5-6.2 3.5z"/></svg>
+            </a>
+
+            <a class="ico" href="https://maps.app.goo.gl/PCJQtERUQCZnT6tv6" target="_blank" rel="noopener" aria-label="Location">
+              <svg viewBox="0 0 24 24"><path d="M12 2c3.9 0 7 3.1 7 7 0 5.2-7 13-7 13S5 14.2 5 9c0-3.9 3.1-7 7-7zm0 9.4c1.3 0 2.4-1.1 2.4-2.4S13.3 6.6 12 6.6 9.6 7.7 9.6 9s1.1 2.4 2.4 2.4z"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="fBottom">
+        <div class="fCopy" data-ar="© 2026 بيت التحفيات — جميع الحقوق محفوظة" data-en="© 2026 House of Antiques — All rights reserved">
+          © 2026 بيت التحفيات — جميع الحقوق محفوظة
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>
